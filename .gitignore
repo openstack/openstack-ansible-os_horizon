@@ -63,3 +63,5 @@ tests/plugins
 
 # Vagrant testing artifacts
 .vagrant
+# Files created by releasenotes build
+releasenotes/build
