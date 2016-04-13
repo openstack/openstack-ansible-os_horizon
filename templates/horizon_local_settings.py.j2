@@ -271,7 +271,7 @@ OPENSTACK_NEUTRON_NETWORK = {
     'enable_ha_router': False,
     'enable_lb': {{ horizon_enable_neutron_lbaas | bool }},
     'enable_firewall': {{ horizon_enable_neutron_fwaas | bool }},
-    'enable_vpn': False,
+    'enable_vpn': {{ horizon_enable_neutron_vpnaas | bool }},
     'enable_fip_topology_check': True,
 
     # Neutron can be configured with a default Subnet Pool to be used for IPv4
