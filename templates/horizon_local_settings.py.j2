@@ -94,7 +94,7 @@ OPENSTACK_KEYSTONE_DEFAULT_DOMAIN = "{{ horizon_keystone_default_domain }}"
 
 # Turn off browser autocompletion for forms including the login form and
 # the database creation workflow if so desired.
-#HORIZON_CONFIG["password_autocomplete"] = "off"
+HORIZON_CONFIG["password_autocomplete"] = "{{ (horizon_enable_password_autocomplete | bool) | ternary('on','off') }}"
 
 # Setting this to True will disable the reveal button for password fields,
 # including on the login form.
