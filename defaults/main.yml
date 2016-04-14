@@ -73,7 +73,7 @@ horizon_lib_wsgi_file: "{{ horizon_lib_dir }}/openstack_dashboard/wsgi/django.ws
 
 horizon_endpoint_type: internalURL
 
-horizon_server_name: "horizon"
+horizon_server_name: "{{ ansible_hostname | default('horizon') }}"
 horizon_apache_servertokens: "Prod"
 horizon_apache_serversignature: "Off"
 horizon_log_level: info
