@@ -15,3 +15,7 @@
 # and the disk images are rebuilt and redeployed.
 curl
 apt-transport-https
+
+# Requirements for Paramiko 2.0
+libssl-dev
+libffi-dev
