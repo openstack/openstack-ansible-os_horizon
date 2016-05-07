@@ -266,7 +266,7 @@ OPENSTACK_CINDER_FEATURES = {
 OPENSTACK_NEUTRON_NETWORK = {
     'enable_router': True,
     'enable_quotas': True,
-    'enable_ipv6': False,
+    'enable_ipv6': {{ horizon_enable_ipv6 | bool }},
     'enable_distributed_router': False,
     'enable_ha_router': False,
     'enable_lb': {{ horizon_enable_neutron_lbaas | bool }},
