@@ -269,7 +269,7 @@ OPENSTACK_NEUTRON_NETWORK = {
     'enable_ipv6': {{ horizon_enable_ipv6 | bool }},
     'enable_distributed_router': False,
     'enable_ha_router': False,
-    'enable_lb': {{ horizon_enable_neutron_lbaas | bool }},
+    'enable_lb': {{ horizon_enable_neutron_lbaas | bool and neutron_plugin_base is defined and 'neutron_lbaas.services.loadbalancer.plugin.LoadBalancerPlugin' in neutron_plugin_base }},
     'enable_firewall': {{ horizon_enable_neutron_fwaas | bool }},
     'enable_vpn': {{ horizon_enable_neutron_vpnaas | bool }},
     'enable_fip_topology_check': True,

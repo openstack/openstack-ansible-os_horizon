@@ -184,14 +184,15 @@ horizon_requires_pip_packages:
 
 horizon_pip_packages:
   - django-appconf
+  - django-openstack-auth
   - greenlet
   - horizon
   - keystonemiddleware
   - MySQL-python
   - PyMySQL
+  - neutron-lbaas-dashboard
   - oslo.config
   - ply
   - pycrypto
   - python-memcached
   - python-keystoneclient
-  - django-openstack-auth
