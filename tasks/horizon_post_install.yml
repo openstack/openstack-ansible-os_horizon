@@ -77,18 +77,6 @@
   tags:
     - horizon-configs
 
-- name: Collect and compress static files
-  command: "{{ item }}"
-  become: yes
-  become_user: "{{ horizon_system_user_name }}"
-  with_items:
-    - "{{ horizon_bin }}/horizon-manage.py collectstatic --noinput"
-    - "{{ horizon_bin }}/horizon-manage.py compress --force"
-  tags:
-    - horizon-configs
-    - horizon-static-collect
-    - horizon-command-bin
-
 - name: Setup Horizon config(s)
   template:
     src: "{{ item.src }}"
@@ -124,3 +112,16 @@
   when: horizon_customization_module is defined
   tags:
     - horizon-configs
+
+- name: Collect and compress static files
+  command: "{{ item }}"
+  become: yes
+  become_user: "{{ horizon_system_user_name }}"
+  with_items:
+    - "{{ horizon_bin }}/horizon-manage.py collectstatic --noinput"
+    - "{{ horizon_bin }}/horizon-manage.py compress --force"
+  notify: Restart apache2
+  tags:
+    - horizon-configs
+    - horizon-static-collect
+    - horizon-command-bin
