@@ -728,3 +728,7 @@ SITE_BRANDING = '{{ horizon_site_name }}'
 #custom python module with horizon dashboard theme overrides
 HORIZON_CONFIG["customization_module"] = 'horizon_customization.overrides'
 {% endif %}
+
+
+# Set arbitrary horizon configuration options
+HORIZON_CONFIG.update({{ horizon_config_overrides }})
