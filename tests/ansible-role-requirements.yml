@@ -2,6 +2,14 @@
   src: https://git.openstack.org/openstack/openstack-ansible-apt_package_pinning
   scm: git
   version: origin/stable/mitaka
+- name: pip_install
+  src: https://git.openstack.org/openstack/openstack-ansible-pip_install
+  scm: git
+  version: origin/stable/mitaka
+- name: pip_lock_down
+  src: https://git.openstack.org/openstack/openstack-ansible-pip_lock_down
+  scm: git
+  version: origin/stable/mitaka
 - name: galera_client
   src: https://git.openstack.org/openstack/openstack-ansible-galera_client
   scm: git
@@ -32,14 +40,6 @@
   version: origin/stable/mitaka
 - name: os_keystone
   src: https://git.openstack.org/openstack/openstack-ansible-os_keystone
-  scm: git
-  version: origin/stable/mitaka
-- name: pip_install
-  src: https://git.openstack.org/openstack/openstack-ansible-pip_install
-  scm: git
-  version: origin/stable/mitaka
-- name: pip_lock_down
-  src: https://git.openstack.org/openstack/openstack-ansible-pip_lock_down
   scm: git
   version: origin/stable/mitaka
 - name: rabbitmq_server
