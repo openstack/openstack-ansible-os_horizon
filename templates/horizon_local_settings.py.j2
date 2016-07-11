@@ -428,10 +428,6 @@ ENFORCE_PASSWORD_CHECK = {{ horizon_enforce_password_check }}
 #TROVE_ADD_USER_PERMS = []
 #TROVE_ADD_DATABASE_PERMS = []
 
-# Change this patch to the appropriate static directory containing
-# two files: _variables.scss and _styles.scss
-#CUSTOM_THEME_PATH = 'themes/default'
-
 LOGGING = {
     'version': 1,
     # When set to True this will disable all logging except
@@ -729,6 +725,16 @@ SITE_BRANDING = '{{ horizon_site_name }}'
 HORIZON_CONFIG["customization_module"] = 'horizon_customization.overrides'
 {% endif %}
 
+AVAILABLE_THEMES = [
+{% for key, value in _horizon_available_themes.iteritems() %}
+    ('{{ value.theme_name }}', '{{ value.theme_label }}', '{{ value.theme_path }}'),
+{% endfor %}
+{% for key, value in horizon_custom_themes.iteritems() %}
+    ('{{ value.theme_name }}', '{{ value.theme_label }}', '{{ value.theme_path }}'),
+{% endfor %}
+]
+
+DEFAULT_THEME = '{{ horizon_default_theme }}'
 
 # Set arbitrary horizon configuration options
 HORIZON_CONFIG.update({{ horizon_config_overrides }})

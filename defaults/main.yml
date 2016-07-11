@@ -165,6 +165,44 @@ horizon_default_panel: overview
 ## See http://docs.openstack.org/developer/horizon/topics/customizing.html#horizon-customization-module-overrides
 # horizon_customization_module: /local/path/to/customization_module.py
 
+## Replace default theme files with your own
+# horizon_custom_uploads:
+#   logo:
+#     src: "path_on_deployment_host_of_your_custom_logo.png"
+#     dest: "img/logo.png"
+#   logo_splash:
+#     src: "path_on_deployment_host_of_your_custom_logo-splash.png"
+#     dest: "img/logo-splash.png"
+
+_horizon_available_themes:
+  default:
+    theme_name: "default"
+    theme_label: "Default"
+    theme_path: "themes/default"
+  material:
+    theme_name: "material"
+    theme_label: "Material"
+    theme_path: "themes/material"
+
+# Add custom themes. Deployers need to place the theme directories
+# and files on the horizon containers in:
+#   {{ horizon_lib_dir }}/openstack_dashboard/themes
+# See http://docs.openstack.org/developer/horizon/topics/customizing.html#themes
+# for more details on custom themes
+# Example:
+#
+# horizon_custom_themes:
+#   custom_theme:
+#     theme_name: "custom"
+#     theme_label: "Custom"
+#     theme_path: "themes/custom"
+#
+horizon_custom_themes: {}
+
+# Which of the available themes will be used by default
+# value is the theme_name from the vars above
+horizon_default_theme: "default"
+
 horizon_webroot: /
 
 horizon_listen_ports:
