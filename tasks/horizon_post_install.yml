@@ -113,6 +113,16 @@
   tags:
     - horizon-configs
 
+- name: Compile messages for translation
+  command: "{{ horizon_bin }}/horizon-manage.py compilemessages"
+  args:
+    chdir: "{{ horizon_lib_dir }}/{{ item }}"
+  with_items:
+    - horizon
+    - openstack_dashboard
+  tags:
+    - horizon-configs
+
 - name: Collect and compress static files
   command: "{{ item }}"
   become: yes
