@@ -738,3 +738,9 @@ DEFAULT_THEME = '{{ horizon_default_theme }}'
 
 # Set arbitrary horizon configuration options
 HORIZON_CONFIG.update({{ horizon_config_overrides }})
+
+OPENSTACK_KEYSTONE_ADMIN_ROLES = [
+{% for item in horizon_keystone_admin_roles %}
+  '{{ item }}',
+{% endfor %}
+]

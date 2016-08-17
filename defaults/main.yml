@@ -243,3 +243,6 @@ horizon_pip_packages:
 
 # Set arbitrary horizon configuration options
 horizon_config_overrides: {}
+
+horizon_keystone_admin_roles:
+  - admin
