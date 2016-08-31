@@ -60,7 +60,7 @@
   file:
     src: "{{ horizon_venv_lib_dir }}/neutron_lbaas_dashboard/enabled/_1481_project_ng_loadbalancersv2_panel.py"
     path: "{{ horizon_venv_lib_dir }}/openstack_dashboard/local/enabled/_1481_project_ng_loadbalancersv2_panel.py"
-    state: "{{ (horizon_enable_neutron_lbaas | bool and neutron_plugin_base is defined and 'neutron_lbaas.services.loadbalancer.plugin.LoadBalancerPluginv2' in neutron_plugin_base) | ternary('link', 'absent') }}"
+    state: "{{ (horizon_enable_neutron_lbaas | bool) | ternary('link', 'absent') }}"
   notify: Restart apache2
   tags:
     - horizon-configs
