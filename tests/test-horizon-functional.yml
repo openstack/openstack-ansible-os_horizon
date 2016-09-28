@@ -58,7 +58,7 @@
       retries: 5
       delay: 10
   vars_files:
-    - playbooks/test-vars.yml
+    - common/test-vars.yml
     - test-vars.yml
 
 - name: Playbook for tempest testing of horizon
@@ -71,5 +71,5 @@
         . {{ tempest_bin }}/activate
         {{ tempest_bin | dirname }}/run_tempest.sh --no-virtual-env --serial tempest_horizon.tests.scenario.test_dashboard_basic_ops.TestDashboardBasicOps
   vars_files:
-    - playbooks/test-vars.yml
+    - common/test-vars.yml
     - test-vars.yml

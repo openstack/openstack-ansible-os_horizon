@@ -45,5 +45,5 @@
   roles:
     - role: "os_horizon"
   vars_files:
-    - playbooks/test-vars.yml
+    - common/test-vars.yml
     - test-vars.yml
