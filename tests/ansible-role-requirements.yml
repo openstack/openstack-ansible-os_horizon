@@ -1,48 +1,48 @@
 - name: apt_package_pinning
   src: https://git.openstack.org/openstack/openstack-ansible-apt_package_pinning
   scm: git
-  version: master
+  version: stable/newton
 - name: pip_install
   src: https://git.openstack.org/openstack/openstack-ansible-pip_install
   scm: git
-  version: master
+  version: stable/newton
 - name: galera_client
   src: https://git.openstack.org/openstack/openstack-ansible-galera_client
   scm: git
-  version: master
+  version: stable/newton
 - name: galera_server
   src: https://git.openstack.org/openstack/openstack-ansible-galera_server
   scm: git
-  version: master
+  version: stable/newton
 - name: lxc_container_create
   src: https://git.openstack.org/openstack/openstack-ansible-lxc_container_create
   scm: git
-  version: master
+  version: stable/newton
 - name: openstack_hosts
   src: https://git.openstack.org/openstack/openstack-ansible-openstack_hosts
   scm: git
-  version: master
+  version: stable/newton
 - name: lxc_hosts
   src: https://git.openstack.org/openstack/openstack-ansible-lxc_hosts
   scm: git
-  version: master
+  version: stable/newton
 - name: memcached_server
   src: https://git.openstack.org/openstack/openstack-ansible-memcached_server
   scm: git
-  version: master
+  version: stable/newton
 - name: openstack_openrc
   src: https://git.openstack.org/openstack/openstack-ansible-openstack_openrc
   scm: git
-  version: master
+  version: stable/newton
 - name: os_keystone
   src: https://git.openstack.org/openstack/openstack-ansible-os_keystone
   scm: git
-  version: master
+  version: stable/newton
 - name: rabbitmq_server
   src: https://git.openstack.org/openstack/openstack-ansible-rabbitmq_server
   scm: git
-  version: master
+  version: stable/newton
 - name: os_tempest
   src: https://git.openstack.org/openstack/openstack-ansible-os_tempest
   scm: git
-  version: master
+  version: stable/newton
