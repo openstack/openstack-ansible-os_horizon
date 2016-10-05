@@ -46,4 +46,3 @@
     - role: "os_horizon"
   vars_files:
     - common/test-vars.yml
-    - test-vars.yml
