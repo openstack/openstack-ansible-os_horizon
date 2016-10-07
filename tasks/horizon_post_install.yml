@@ -48,12 +48,12 @@
     state: "{{ horizon_enable_magnum_ui | ternary('link', 'absent') }}"
   notify: Restart apache2
   with_items:
-    - src: "{{ horizon_lib_dir }}/magnum_ui/enabled/_1370_project_container-infra_panelgroup.py"
-      path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_1370_project_container-infra_panelgroup.py"
-    - src: "{{ horizon_lib_dir }}/magnum_ui/enabled/_1371_project_container-infra_bays_panel.py"
-      path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_1371_project_container-infra_bays_panel.py"
-    - src: "{{ horizon_lib_dir }}/magnum_ui/enabled/_1372_project_container-infra_baymodels_panel.py"
-      path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_1372_project_container-infra_baymodels_panel.py"
+    - src: "{{ horizon_lib_dir }}/magnum_ui/enabled/_1370_project_container_infra_panel_group.py"
+      path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_1370_project_container_infra_panel_group.py"
+    - src: "{{ horizon_lib_dir }}/magnum_ui/enabled/_1371_project_container_infra_clusters_panel.py"
+      path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_1371_project_container_infra_clusters_panel.py"
+    - src: "{{ horizon_lib_dir }}/magnum_ui/enabled/_1372_project_container_infra_cluster_templates_panel.py"
+      path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_1372_project_container_infra_cluster_templates_panel.py"
   tags:
     - horizon-configs
 
