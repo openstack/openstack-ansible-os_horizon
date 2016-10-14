@@ -68,9 +68,11 @@ OPENSTACK_API_VERSIONS = {
 # will require user to enter the Domain name in addition to username for login.
 OPENSTACK_KEYSTONE_MULTIDOMAIN_SUPPORT = {{ horizon_keystone_multidomain_support }}
 
+{%   if not horizon_keystone_multidomain_support | bool %}
 # Overrides the default domain used when running on single-domain model
 # with Keystone V3. All entities will be created in the default domain.
 OPENSTACK_KEYSTONE_DEFAULT_DOMAIN = "{{ horizon_keystone_default_domain }}"
+{%   endif %}
 {% endif %}
 
 # Set Console type:
