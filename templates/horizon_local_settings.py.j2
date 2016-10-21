@@ -92,7 +92,7 @@ OPENSTACK_KEYSTONE_DEFAULT_DOMAIN = "{{ horizon_keystone_default_domain }}"
 
 # Disable simplified floating IP address management for deployments with
 # multiple floating IP pools or complex network requirements.
-#HORIZON_CONFIG["simple_ip_management"] = False
+HORIZON_CONFIG["simple_ip_management"] = {{ horizon_simple_ip_management | bool }}
 
 # Turn off browser autocompletion for forms including the login form and
 # the database creation workflow if so desired.
@@ -307,6 +307,12 @@ OPENSTACK_NEUTRON_NETWORK = {
     'supported_vnic_types': ['*']
 }
 
+# The OPENSTACK_HEAT_STACK settings can be used to disable password
+# field required while launching the stack.
+OPENSTACK_HEAT_STACK = {
+    'enable_user_pass': True,
+}
+
 # The OPENSTACK_IMAGE_BACKEND settings can be used to customize features
 # in the OpenStack Dashboard related to the Image service, such as the list
 # of supported image formats.
@@ -343,6 +349,12 @@ IMAGE_CUSTOM_PROPERTY_TITLES = {
 # table.
 IMAGE_RESERVED_CUSTOM_PROPERTIES = []
 
+# Set to 'legacy' or 'direct' to allow users to upload images to glance via
+# Horizon server. When enabled, a file form field will appear on the create
+# image form. If set to 'off', there will be no file form field on the create
+# image form. See documentation for deployment considerations.
+HORIZON_IMAGES_UPLOAD_MODE = '{{ horizon_images_upload_mode }}'
+
 # OPENSTACK_ENDPOINT_TYPE specifies the endpoint type to use for the endpoints
 # in the Keystone service catalog. Use this setting when Horizon is running
 # external to the OpenStack environment. The default is 'publicURL'.
@@ -363,6 +375,9 @@ API_RESULT_PAGE_SIZE = 20
 
 # The size of chunk in bytes for downloading objects from Swift
 SWIFT_FILE_TRANSFER_CHUNK_SIZE = {{ horizon_swift_file_transfer_chunk_size }}
+
+# The default number of lines displayed for instance console log.
+INSTANCE_LOG_LENGTH = {{ horizon_instance_log_length  }}
 
 # Specify a maximum number of items to display in a dropdown.
 DROPDOWN_MAX_ITEMS = {{ horizon_dropdown_max_items }}
@@ -693,7 +708,9 @@ SECURITY_GROUP_RULES = {
 # the enabled panel configuration.
 # You should not add settings to this list for out of tree extensions.
 # See: https://wiki.openstack.org/wiki/Horizon/RESTAPI
-REST_API_REQUIRED_SETTINGS = ['OPENSTACK_HYPERVISOR_FEATURES']
+REST_API_REQUIRED_SETTINGS = ['OPENSTACK_HYPERVISOR_FEATURES',
+                              'LAUNCH_INSTANCE_DEFAULTS',
+                              'OPENSTACK_IMAGE_FORMATS']
 
 # Additional settings can be made available to the client side for
 # extensibility by specifying them in REST_API_ADDITIONAL_SETTINGS
@@ -709,6 +726,24 @@ REST_API_REQUIRED_SETTINGS = ['OPENSTACK_HYPERVISOR_FEATURES']
 # For more information see:
 # http://tinyurl.com/anticlickjack
 #DISALLOW_IFRAME_EMBED = True
+
+# The default date range in the Overview panel meters - either <today> minus N
+# days (if the value is integer N), or from the beginning of the current month
+# until today (if set to None). This setting should be used to limit the amount
+# of data fetched by default when rendering the Overview panel.
+OVERVIEW_DAYS_RANGE = {{ horizon_overview_days_range }}
+
+# Dict used to restrict user private subnet cidr range.
+# An empty list means that user input will not be restricted
+# for a corresponding IP version. By default, there is
+# no restriction for IPv4 or IPv6. To restrict
+# user private subnet cidr range set ALLOWED_PRIVATE_SUBNET_CIDR
+# to something like
+#ALLOWED_PRIVATE_SUBNET_CIDR = {
+#    'ipv4': ['10.0.0.0/8', '192.168.0.0/16'],
+#    'ipv6': ['fc00::/7']
+#}
+ALLOWED_PRIVATE_SUBNET_CIDR = {'ipv4': [], 'ipv6': []}
 
 {% if horizon_nova_extensions_blacklist is defined %}
 OPENSTACK_NOVA_EXTENSIONS_BLACKLIST = [

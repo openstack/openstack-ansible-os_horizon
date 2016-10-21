@@ -81,6 +81,9 @@ horizon_apache_serversignature: "Off"
 horizon_log_level: info
 horizon_apache_custom_log_format: combined
 horizon_dropdown_max_items: 30
+horizon_instance_log_length: 35
+horizon_overview_days_range: 1
+horizon_images_upload_mode: direct
 horizon_time_zone: UTC
 horizon_enforce_password_check: False
 horizon_disable_password_reveal: False
@@ -91,6 +94,10 @@ horizon_can_set_password: False
 horizon_enable_cinder_backup: False
 # Enables IPv6 support in Horizon, such as managing network subnets
 horizon_enable_ipv6: True
+
+# Disable/Enable simplified floating IP address management for deployments with
+# multiple floating IP pools or complex network requirements.
+horizon_simple_ip_management: True
 
 # To enable ha router support in horizon set to True
 horizon_enable_ha_router: False
