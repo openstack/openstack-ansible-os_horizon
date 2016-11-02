@@ -27,10 +27,6 @@ horizon_developer_mode: false
 horizon_git_repo: https://git.openstack.org/openstack/horizon
 horizon_git_install_branch: stable/newton
 
-## The git source/branch for the upper-constraints (used in developer mode)
-horizon_requirements_git_repo: https://git.openstack.org/openstack/requirements
-horizon_requirements_git_install_branch: stable/newton
-
 ## The git source/branch for the Magnum UI plugin
 magnum_dashboard_git_repo: https://git.openstack.org/openstack/magnum-ui
 magnum_dashboard_git_install_branch: stable/newton
