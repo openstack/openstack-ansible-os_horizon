@@ -20,6 +20,21 @@
     owner: "{{ horizon_apache_default_log_owner }}"
     group: "{{ horizon_apache_default_log_grp }}"
 
+# Workaround for https://github.com/ansible/ansible-modules-core/issues/5328
+# TODO: Replace using apache2_module when fixed in Ansible release
+- name: Enable apache2 modules
+  command: "{{ (item.state == 'present') | ternary('a2enmod','a2dismod') }} {{ item.name }}"
+  register: horizon_apache2_module
+  changed_when: horizon_apache2_module.stdout.find('{{ item.name }} already') == -1
+  with_items:
+    - { state: present, name: wsgi }
+    - { state: present, name: ssl }
+    - { state: absent, name: mpm_event }
+    - { state: present, name: mpm_worker }
+    - { state: present, name: rewrite }
+    - { state: present, name: headers }
+  notify: Restart apache2
+
 - name: Drop apache2 configs
   template:
     src: "{{ item.src }}"
@@ -39,19 +54,6 @@
   with_items:
     - { state: link, name: openstack-dashboard.conf }
     - { state: absent, name: 000-default.conf }
-  notify: Restart apache2
-
-- name: Enable apache2 modules
-  apache2_module:
-    state: "{{ item.state }}"
-    name: "{{ item.name }}"
-  with_items:
-    - { state: present, name: wsgi }
-    - { state: present, name: ssl }
-    - { state: absent, name: mpm_event }
-    - { state: present, name: mpm_worker }
-    - { state: present, name: rewrite }
-    - { state: present, name: headers }
   notify: Restart apache2
 
 - name: Ensure Apache ServerName
