@@ -120,6 +120,22 @@
     - horizon_get_venv | failed or horizon_developer_mode | bool
   notify: Restart apache2
 
+- name: Install optional pip packages
+  pip:
+    name: "{{ horizon_optional_pip_packages | join(' ') }}"
+    state: "{{ horizon_pip_package_state }}"
+    virtualenv: "{{ horizon_bin | dirname }}"
+    virtualenv_site_packages: "no"
+    extra_args: >-
+      {{ horizon_developer_mode | ternary('--constraint /opt/developer-pip-constraints.txt', '') }}
+      {{ (pip_install_upper_constraints is defined) | ternary('--constraint ' + pip_install_upper_constraints | default(''),'') }}
+      {{ pip_install_options | default('') }}
+  register: install_packages
+  until: install_packages|success
+  retries: 5
+  delay: 2
+  when: horizon_optional_pip_packages | length > 0
+
 - name: Update virtualenv path
   command: >
     virtualenv-tools --update-path=auto {{ horizon_bin | dirname }}

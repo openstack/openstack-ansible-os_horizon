@@ -251,6 +251,10 @@ horizon_pip_packages:
   - python-keystoneclient
   - sahara_dashboard
 
+# This variable is used to install additional pip packages
+# that could be needed for additional dashboards
+horizon_optional_pip_packages: []
+
 # This variable is used by the repo_build process to determine
 # which host group to check for members of before building the
 # pip packages required by this role. The value is picked up
