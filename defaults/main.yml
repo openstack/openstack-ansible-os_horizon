@@ -18,10 +18,10 @@ debug: False
 verbose: True
 
 horizon_git_repo: https://git.openstack.org/openstack/horizon
-horizon_git_install_branch: master
+horizon_git_install_branch: stable/mitaka
 horizon_developer_mode: false
 horizon_requirements_git_repo: https://git.openstack.org/openstack/requirements
-horizon_requirements_git_install_branch: master
+horizon_requirements_git_install_branch: stable/mitaka
 horizon_developer_constraints:
   - "git+{{ horizon_git_repo }}@{{ horizon_git_install_branch }}#egg=horizon"
 
