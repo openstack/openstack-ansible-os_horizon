@@ -39,49 +39,19 @@
   retries: 5
   delay: 2
 
-- name: Get local venv checksum
-  stat:
-    path: "/var/cache/{{ horizon_venv_download_url | basename }}"
-    get_md5: False
-  when:
-    - not horizon_developer_mode | bool
-  register: local_venv_stat
-
-- name: Get remote venv checksum
-  uri:
-    url: "{{ horizon_venv_download_url | replace('tgz', 'checksum') }}"
-    return_content: True
-  when:
-    - not horizon_developer_mode | bool
-  register: remote_venv_checksum
-
-# TODO: When project moves to ansible 2 we can pass this a sha256sum which will:
-#       a) allow us to remove force: yes
-#       b) allow the module to calculate the checksum of dest file which would
-#          result in file being downloaded only if provided and dest sha256sum
-#          checksums differ
 - name: Attempt venv download
   get_url:
     url: "{{ horizon_venv_download_url }}"
     dest: "/var/cache/{{ horizon_venv_download_url | basename }}"
-    force: yes
-  ignore_errors: true
-  register: get_venv
-  when:
-    - not horizon_developer_mode | bool
-    - (local_venv_stat.stat.exists == False or
-        {{ local_venv_stat.stat.checksum is defined and local_venv_stat.stat.checksum != remote_venv_checksum.content | trim }})
-
-- name: Set horizon get_venv fact
-  set_fact:
-    horizon_get_venv: "{{ get_venv }}"
+    checksum: "sha1:{{ lookup('url', horizon_venv_download_url | replace('tgz', 'checksum')) }}"
+  register: horizon_get_venv
+  when: not horizon_developer_mode | bool
 
 - name: Remove existing venv
   file:
     path: "{{ horizon_bin | dirname }}"
     state: absent
-  when:
-    - horizon_get_venv | changed
+  when: horizon_get_venv | changed
 
 - name: Create horizon venv dir
   file:
@@ -116,8 +86,7 @@
   until: install_packages|success
   retries: 5
   delay: 2
-  when:
-    - horizon_get_venv | failed or horizon_developer_mode | bool
+  when: horizon_developer_mode | bool
   notify: Restart apache2
 
 - name: Install optional pip packages
@@ -141,7 +110,7 @@
     virtualenv-tools --update-path=auto {{ horizon_bin | dirname }}
   when:
     - not horizon_developer_mode | bool
-    - horizon_get_venv | success
+    - horizon_get_venv | changed or horizon_venv_dir | changed
 
 - name: Create horizon link for venv
   file:
