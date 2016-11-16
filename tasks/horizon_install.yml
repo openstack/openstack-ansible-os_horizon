@@ -107,7 +107,7 @@
 
 - name: Update virtualenv path
   command: >
-    virtualenv-tools --update-path=auto {{ horizon_bin | dirname }}
+    virtualenv-tools --update-path=auto --reinitialize {{ horizon_bin | dirname }}
   when:
     - not horizon_developer_mode | bool
     - horizon_get_venv | changed or horizon_venv_dir | changed
