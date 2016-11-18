@@ -17,7 +17,7 @@ horizon_developer_mode: true
 horizon_venv_tag: "testing"
 horizon_git_install_branch: stable/newton
 horizon_requirements_git_install_branch: stable/newton
-horizon_galera_address: "{{ hostvars[groups['galera_all'][0]]['ansible_host'] }}"
+horizon_galera_address: "{{ test_galera_host }}"
 horizon_galera_database: dash
 horizon_galera_user: dash
 horizon_rabbitmq_password: "secrete"

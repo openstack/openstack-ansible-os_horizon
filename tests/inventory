@@ -1,8 +1,8 @@
 [all]
 localhost ansible_become=True
-infra1 ansible_host=10.100.100.2 ansible_become=True ansible_user=root
-keystone1 ansible_host=10.100.100.3 ansible_become=True ansible_user=root
-horizon1 ansible_host=10.100.100.4 ansible_become=True ansible_user=root
+infra1 ansible_host=10.1.0.2 ansible_become=True ansible_user=root
+keystone1 ansible_host=10.1.0.3 ansible_become=True ansible_user=root
+horizon1 ansible_host=10.1.0.4 ansible_become=True ansible_user=root
 
 [all_containers]
 infra1
