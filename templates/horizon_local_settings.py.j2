@@ -725,7 +725,11 @@ REST_API_REQUIRED_SETTINGS = ['OPENSTACK_HYPERVISOR_FEATURES',
 # where iframes are not used in deployment. Default setting is True.
 # For more information see:
 # http://tinyurl.com/anticlickjack
+{% if horizon_disallow_iframe_embed is defined %}
+DISALLOW_IFRAME_EMBED = {{ horizon_disallow_iframe_embed }}
+{% else %}
 #DISALLOW_IFRAME_EMBED = True
+{% endif %}
 
 # The default date range in the Overview panel meters - either <today> minus N
 # days (if the value is integer N), or from the beginning of the current month
