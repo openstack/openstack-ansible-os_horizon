@@ -34,13 +34,12 @@
 
 - include: horizon_post_install.yml
   tags:
-    - horizon-install
     - horizon-config
 
 - include: horizon_db_setup.yml
   when: inventory_hostname == groups['horizon_all'][0]
   tags:
-    - horizon-install
+    - horizon-config
 
 - include: horizon_ssl_self_signed.yml
   static: no
@@ -48,28 +47,27 @@
     - not horizon_external_ssl|bool
     - horizon_user_ssl_cert is not defined or horizon_user_ssl_key is not defined
   tags:
-    - horizon-install
+    - horizon-config
 
 - include: horizon_ssl_user_provided.yml
   static: no
   when: not horizon_external_ssl|bool
   tags:
-    - horizon-install
     - horizon-config
 
 - name: Update the ca certificates
   command: "update-ca-certificates -f"
   when: not horizon_external_ssl|bool
   tags:
+    - horizon-config
     - horizon-ssl
 
 - include: horizon_service_setup.yml
   tags:
-    - horizon-install
+    - horizon-config
 
 - include: horizon_apache.yml
   tags:
-    - horizon-install
     - horizon-config
 
 - name: Flush handlers

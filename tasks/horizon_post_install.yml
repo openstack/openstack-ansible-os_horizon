@@ -38,8 +38,6 @@
     path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_2200_ironic.py"
     state: "{{ horizon_enable_ironic_ui | ternary('link', 'absent') }}"
   notify: Restart apache2
-  tags:
-    - horizon-configs
 
 - name: Enable the magnum-ui-dashboard Horizon panel
   file:
@@ -54,8 +52,6 @@
       path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_1371_project_container_infra_clusters_panel.py"
     - src: "{{ horizon_lib_dir }}/magnum_ui/enabled/_1372_project_container_infra_cluster_templates_panel.py"
       path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_1372_project_container_infra_cluster_templates_panel.py"
-  tags:
-    - horizon-configs
 
 - name: Enable the sahara-dashboard Horizon panel
   file:
@@ -70,8 +66,6 @@
       path: "{{ horizon_lib_dir }}/openstack_dashboard/enabled/_1820_data_processing_clusters_panel.py"
     - src: "{{ horizon_lib_dir }}/sahara_dashboard/enabled/_1840_data_processing_jobs_panel.py"
       path: "{{ horizon_lib_dir }}/openstack_dashboard/enabled/_1840_data_processing_jobs_panel.py"
-  tags:
-    - horizon-configs
 
 - name: Enable the neutron-lbaas-dashboard Horizon panel
   file:
@@ -126,8 +120,6 @@
   with_items:
     - horizon
     - openstack_dashboard
-  tags:
-    - horizon-configs
 
 - name: Collect and compress static files
   command: "{{ item }}"
