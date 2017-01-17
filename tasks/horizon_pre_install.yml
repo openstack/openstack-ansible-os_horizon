@@ -37,7 +37,7 @@
     group: "{{ item.group|default(horizon_system_group_name) }}"
   with_items:
     - { path: "/openstack", mode: "0755", owner: "root", group: "root" }
-    - { path: "/etc/horizon", mode: "2755" }
+    - { path: "/etc/horizon", mode: "2750" }
     - { path: "{{ horizon_system_user_home }}", mode: "2755" }
 
 - name: Test for log directory or link
