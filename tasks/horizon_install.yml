@@ -81,6 +81,9 @@
     dest: "/var/cache/{{ horizon_venv_download_url | basename }}"
     checksum: "sha1:{{ lookup('url', horizon_venv_download_url | replace('tgz', 'checksum')) }}"
   register: horizon_get_venv
+  retries: 5
+  delay: 5
+  until: horizon_get_venv | succeeded
   when: horizon_venv_download | bool
 
 - name: Remove existing venv
