@@ -38,7 +38,7 @@ horizon_apache_site_enabled: "/etc/apache2/sites-enabled/openstack-dashboard.con
 
 horizon_apache_configs:
   - { src: "horizon_apache_ports.conf.j2", dest: "/etc/apache2/ports.conf", owner: "root", group: "root" }
-  - { src: "openstack_dashboard.conf.j2", dest: "{{ horizon_apache_site_available }}" }
+  - { src: "openstack_dashboard.conf.j2", dest: "{{ horizon_apache_site_available }}", owner: "root", group: "root" }
 
 horizon_apache_default_sites:
   - "/etc/apache2/sites-enabled/000-default.conf"

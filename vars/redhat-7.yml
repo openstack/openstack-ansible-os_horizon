@@ -35,7 +35,7 @@ horizon_apache_security_conf: "{{ horizon_apache_conf }}"
 
 horizon_apache_configs:
   - { src: "horizon_apache_ports.conf.j2", dest: "/etc/httpd/conf.d/ports.conf", owner: "root", group: "root" }
-  - { src: "openstack_dashboard.conf.j2", dest: "/etc/httpd/conf.d/openstack-dashboard.conf" }
+  - { src: "openstack_dashboard.conf.j2", dest: "/etc/httpd/conf.d/openstack-dashboard.conf", owner: "root", group: "root" }
 
 horizon_apache_default_sites:
   - "/etc/httpd/conf.d/userdir.conf"
