@@ -44,7 +44,8 @@ horizon_venv_download_url: http://127.0.0.1/venvs/untagged/ubuntu/horizon.tgz
 
 ## System info
 horizon_system_user_name: horizon
-horizon_system_group_name: www-data
+horizon_system_group_name: horizon
+
 horizon_system_shell: /bin/false
 horizon_system_comment: horizon system user
 horizon_system_user_home: "/var/lib/{{ horizon_system_user_name }}"
