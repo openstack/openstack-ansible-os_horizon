@@ -11,8 +11,6 @@
     horizon_container_mysql_password: "SuperSecrete"
     horizon_secret_key: "SuperSecreteHorizonKey"
     horizon_external_ssl: true
-    horizon_ssl_protocol: "ALL -SSLv2 -SSLv3"
-    horizon_ssl_cipher_suite: "ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS"
     galera_root_password: "secrete"
     rabbitmq_servers: 10.100.100.101
     rabbitmq_use_ssl: false
