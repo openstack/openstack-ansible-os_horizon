@@ -113,6 +113,14 @@ horizon_simple_ip_management: True
 # To enable ha router support in horizon set to True
 horizon_enable_ha_router: False
 
+# DISALLOW_IFRAME_EMBED can be used to prevent Horizon from being embedded
+# within an iframe. Legacy browsers are still vulnerable to a Cross-Frame
+# Scripting (XFS) vulnerability, so this option allows extra security hardening
+# where iframes are not used in deployment. Default setting is True.
+# For more information see:
+# http://tinyurl.com/anticlickjack
+horizon_disallow_iframe_embed: True
+
 # WSGI tuning parameters
 # horizon_wsgi_processes: 4
 # horizon_wsgi_threads: 4
