@@ -159,6 +159,9 @@
   with_items:
     - horizon
     - openstack_dashboard
+  register: async_compile_messages
+  async: 600
+  poll: 0
 
 - name: Collect and compress static files
   command: "{{ item }}"
@@ -169,3 +172,6 @@
     - "{{ horizon_bin }}/horizon-manage.py collectstatic --noinput"
     - "{{ horizon_bin }}/horizon-manage.py compress --force"
   notify: Restart apache2
+  register: async_compress_static_files
+  async: 600
+  poll: 0
