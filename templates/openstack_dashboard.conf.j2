@@ -1,8 +1,5 @@
 # {{ ansible_managed }}
 
-{% set _wsgi_threads = ansible_processor_vcpus | default(2) // 2 %}
-{% set wsgi_threads = _wsgi_threads if _wsgi_threads > 0 else 1 %}
-
 {% if not horizon_external_ssl | bool %}
 <VirtualHost *:80>
     ServerName {{ horizon_server_name }}
@@ -36,7 +33,7 @@
 {% endif %}
 
     WSGIScriptAlias / {{ horizon_lib_wsgi_file }}
-    WSGIDaemonProcess horizon user={{ horizon_system_user_name }} group={{ horizon_system_group_name }} processes={{ horizon_wsgi_processes | default(wsgi_threads) }} threads={{ horizon_wsgi_threads | default(wsgi_threads) }} python-path={{ horizon_bin | dirname }}/lib/python2.7/site-packages
+    WSGIDaemonProcess horizon user={{ horizon_system_user_name }} group={{ horizon_system_group_name }} processes={{ horizon_wsgi_processes | default(horizon_wsgi_threads) }} threads={{ horizon_wsgi_threads }} python-path={{ horizon_bin | dirname }}/lib/python2.7/site-packages
 
     WSGIProcessGroup horizon
     WSGIApplicationGroup horizon

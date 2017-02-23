@@ -125,6 +125,10 @@ horizon_disallow_iframe_embed: True
 # horizon_wsgi_processes: 4
 # horizon_wsgi_threads: 4
 
+## Cap the maximun number of threads / workers when a user value is unspecified.
+horizon_wsgi_threads_max: 16
+horizon_wsgi_threads: "{{ [[ansible_processor_vcpus|default(2) // 2, 1] | max, horizon_wsgi_threads_max] | min }}"
+
 ## Horizon SSL
 horizon_ssl_cert: /etc/ssl/certs/horizon.pem
 horizon_ssl_key: /etc/ssl/private/horizon.key
