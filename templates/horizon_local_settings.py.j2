@@ -164,8 +164,9 @@ AVAILABLE_REGIONS = [
 {% else %}
 # Set Horizon to use a specific Keystone endpoint
 OPENSTACK_HOST = "{{ horizon_keystone_host }}"
-OPENSTACK_KEYSTONE_URL = "{{ horizon_keystone_endpoint }}"
 {% endif %}
+
+OPENSTACK_KEYSTONE_URL = "{{ horizon_keystone_endpoint }}"
 
 # The default role assigned to users
 OPENSTACK_KEYSTONE_DEFAULT_ROLE = "{{ horizon_default_role_name }}"
