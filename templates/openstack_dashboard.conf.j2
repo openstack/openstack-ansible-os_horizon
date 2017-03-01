@@ -24,7 +24,7 @@
     SSLCACertificateFile  {{ horizon_ssl_ca_cert }}
     {% endif -%}
     SSLCompression Off
-    SSLProtocol All -SSLv2 -SSLv3
+    SSLProtocol {{ horizon_ssl_protocol }} 
     SSLHonorCipherOrder On
     SSLCipherSuite {{ horizon_ssl_cipher_suite }}
     SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
