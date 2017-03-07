@@ -27,3 +27,7 @@ horizon_distro_packages:
   - openssl
   - python-mysqldb # required by the Ansible mysql_db module
   - gettext
+
+horizon_apache_default_log_folder: "/var/log/apache2"
+horizon_apache_default_log_owner: "root"
+horizon_apache_default_log_grp: "adm"
