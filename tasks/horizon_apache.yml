@@ -13,6 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: Ensure apache log folder exists
+  file:
+    dest: "{{ horizon_apache_default_log_folder }}"
+    state: directory
+    owner: "{{ horizon_apache_default_log_owner }}"
+    group: "{{ horizon_apache_default_log_grp }}"
+
 # Workaround for https://github.com/ansible/ansible-modules-core/issues/5328
 # TODO: Replace using apache2_module when fixed in Ansible release
 - name: Enable apache2 modules

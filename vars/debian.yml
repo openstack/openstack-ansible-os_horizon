@@ -31,6 +31,9 @@ horizon_distro_packages:
   - gettext
 
 horizon_apache_conf: "/etc/apache2/apache2.conf"
+horizon_apache_default_log_folder: "/var/log/apache2"
+horizon_apache_default_log_owner: "root"
+horizon_apache_default_log_grp: "adm"
 horizon_apache_security_conf: "/etc/apache2/conf-available/security.conf"
 
 horizon_apache_site_available: "/etc/apache2/sites-available/openstack-dashboard.conf"
