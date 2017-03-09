@@ -13,6 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: Ensure apache log folder exists
+  file:
+    dest: "{{ horizon_apache_default_log_folder }}"
+    state: directory
+    owner: "{{ horizon_apache_default_log_owner }}"
+    group: "{{ horizon_apache_default_log_grp }}"
+
 - name: Drop apache2 configs
   template:
     src: "{{ item.src }}"
