@@ -14,7 +14,7 @@ The OpenStack-Ansible project provides the ability to secure Dashboard
 Refer to `Securing services with SSL certificates`_ for available configuration
 options.
 
-.. _Securing services with SSL certificates: http://docs.openstack.org/developer/openstack-ansible/install-guide/configure-sslcertificates.html
+.. _Securing services with SSL certificates: https://docs.openstack.org/project-deploy-guide/openstack-ansible/ocata/app-advanced-config-sslcertificates.html
 
 Configuring a horizon customization module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
