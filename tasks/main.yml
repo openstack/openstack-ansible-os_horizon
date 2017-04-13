@@ -76,6 +76,8 @@
   retries: 300
   with_items:
     - "{{ async_compile_messages.results }}"
+  tags:
+    - horizon-config
 
 # NOTE(mhayden): The async_status check here must be done as the horizon user
 # since the original task ran as that user. This task will fail if it is run
@@ -91,6 +93,8 @@
   retries: 300
   with_items:
     - "{{ async_compress_static_files.results }}"
+  tags:
+    - horizon-config
 
 - include: horizon_apache.yml
   tags:
