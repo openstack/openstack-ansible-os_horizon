@@ -13,13 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: Ensure apt cache is up to date
-  apt:
-    update_cache: yes
-    cache_valid_time: "{{ cache_timeout }}"
-  when:
-    - ansible_pkg_mgr == 'apt'
-
 - name: Create horizon dir
   file:
     path: "{{ item.path }}"
@@ -46,13 +39,14 @@
 
 - name: Install distro packages
   package:
-    name: "{{ item }}"
+    name: "{{ horizon_distro_packages }}"
     state: "{{ horizon_package_state }}"
+    update_cache: "{{ (ansible_pkg_mgr == 'apt') | ternary('yes', omit) }}"
+    cache_valid_time: "{{ (ansible_pkg_mgr == 'apt') | ternary(cache_timeout, omit) }}"
   register: install_packages
   until: install_packages|success
   retries: 5
   delay: 2
-  with_items: "{{ horizon_distro_packages }}"
 
 - name: Create developer mode constraint file
   copy:
