@@ -69,11 +69,18 @@
   retries: 5
   delay: 2
 
+- name: Retrieve checksum for venv download
+  uri:
+    url: "{{ horizon_venv_download_url | replace('tgz', 'checksum') }}"
+    return_content: yes
+  register: horizon_venv_checksum
+  when: horizon_venv_download | bool
+
 - name: Attempt venv download
   get_url:
     url: "{{ horizon_venv_download_url }}"
     dest: "/var/cache/{{ horizon_venv_download_url | basename }}"
-    checksum: "sha1:{{ lookup('url', horizon_venv_download_url | replace('tgz', 'checksum')) }}"
+    checksum: "sha1:{{ horizon_venv_checksum.content | trim }}"
   register: horizon_get_venv
   retries: 5
   delay: 5
