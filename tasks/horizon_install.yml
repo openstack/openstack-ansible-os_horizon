@@ -134,3 +134,10 @@
     - { path: "{{ horizon_lib_dir }}/openstack_dashboard", mode: "2755" }
     - { path: "{{ horizon_lib_dir }}/openstack_dashboard/local", mode: "2755" }
     - { path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled", mode: "2755" }
+
+- name: Record the venv tag deployed
+  ini_file:
+    dest: "/etc/ansible/facts.d/openstack_ansible.fact"
+    section: horizon
+    option: venv_tag
+    value: "{{ horizon_venv_tag }}"
