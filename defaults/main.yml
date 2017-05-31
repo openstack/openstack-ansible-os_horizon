@@ -81,6 +81,7 @@ horizon_dropdown_max_items: 30
 horizon_instance_log_length: 35
 horizon_overview_days_range: 1
 horizon_images_upload_mode: direct
+horizon_images_allow_location: False
 horizon_time_zone: UTC
 horizon_enforce_password_check: False
 horizon_disable_password_reveal: False
