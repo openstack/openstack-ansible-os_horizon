@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Perform a horizon DB sync
-  command: "{{ horizon_bin }}/horizon-manage.py syncdb --noinput"
+  command: "{{ horizon_bin }}/horizon-manage.py migrate --noinput"
   become: yes
   become_user: "{{ horizon_system_user_name }}"
   changed_when: false
