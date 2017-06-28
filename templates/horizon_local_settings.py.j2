@@ -311,7 +311,7 @@ OPENSTACK_NEUTRON_NETWORK = {
 # The OPENSTACK_HEAT_STACK settings can be used to disable password
 # field required while launching the stack.
 OPENSTACK_HEAT_STACK = {
-    'enable_user_pass': True,
+    'enable_user_pass': {{ horizon_enable_heatstack_user_pass }},
 }
 
 # The OPENSTACK_IMAGE_BACKEND settings can be used to customize features
