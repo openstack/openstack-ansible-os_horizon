@@ -142,12 +142,12 @@
   delay: 2
   when: horizon_optional_pip_packages | length > 0
 
-- name: CentOS remove python from path first
+- name: Remove python from path first (CentOS, openSUSE)
   file:
     path:  "{{ horizon_bin | dirname }}/bin/python2.7"
     state: "absent"
   when:
-    - ansible_pkg_mgr in ['yum', 'dnf']
+    - ansible_pkg_mgr in ['yum', 'dnf', 'zypper']
     - horizon_get_venv | changed
 
 - name: Update virtualenv path
