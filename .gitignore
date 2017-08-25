@@ -66,5 +66,3 @@ tests/*.retry
 
 # Vagrant artifacts
 .vagrant
-
-
