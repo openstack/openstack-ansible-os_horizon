@@ -287,6 +287,7 @@ horizon_pip_packages:
   - MySQL-python
   - PyMySQL
   - neutron-lbaas-dashboard
+  - neutron-fwaas-dashboard
   - oslo.config
   - ply
   - python-memcached

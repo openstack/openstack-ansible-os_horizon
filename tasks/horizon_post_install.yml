@@ -114,6 +114,19 @@
     state: "{{ (horizon_enable_neutron_lbaas | bool) | ternary('link', 'absent') }}"
   notify: Restart apache2
 
+- name: Enable the neutron-fwaas-dashboard Horizon panel
+  file:
+    src: "{{ item.src }}"
+    path: "{{ item.path }}"
+    state: "{{ (horizon_enable_neutron_fwaas | bool) | ternary('link', 'absent') }}"
+  with_items:
+    - src: "{{ horizon_lib_dir }}/neutron_fwaas_dashboard/enabled/_7010_project_firewalls_common.py"
+      path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_7010_project_firewalls_common.py"
+    - src: "{{ horizon_lib_dir }}/neutron_fwaas_dashboard/enabled/_7012_project_firewalls_v2_panel.py"
+      path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_7012_project_firewalls_v2_panel.py"
+  when: (horizon_enable_neutron_fwaas is defined) and (horizon_enable_neutron_fwaas | bool)
+  notify: Restart apache2
+
 - name: Create horizon links
   file:
     src: "{{ item.src }}"
