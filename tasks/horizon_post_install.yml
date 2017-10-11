@@ -84,6 +84,8 @@
       path: "{{ horizon_lib_dir }}/openstack_dashboard/enabled/_1830_data_processing_plugins_panel.py"
     - src: "{{ horizon_lib_dir }}/sahara_dashboard/enabled/_1840_data_processing_jobs_panel.py"
       path: "{{ horizon_lib_dir }}/openstack_dashboard/enabled/_1840_data_processing_jobs_panel.py"
+    - src: "{{ horizon_lib_dir }}/sahara_dashboard/local_settings.d/_12_toggle_data_upload_max_number_fields.py"
+      path: "{{ horizon_lib_dir }}/openstack_dashboard/local/local_settings.d/_12_toggle_data_upload_max_number_fields.py"
 
 - name: Enable the trove-dashboard Horizon panel
   file:
