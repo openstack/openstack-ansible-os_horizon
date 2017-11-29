@@ -208,7 +208,6 @@ horizon_enable_designate_ui: False
 ## Neutron features to enable
 horizon_enable_neutron_lbaas: False
 horizon_enable_neutron_fwaas: False
-horizon_enable_neutron_vpnaas: False
 
 ## Swift
 horizon_swift_file_transfer_chunk_size: 524288
