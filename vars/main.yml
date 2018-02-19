@@ -98,3 +98,6 @@ _horizon_panels:
   - src: "{{ horizon_lib_dir }}/neutron_fwaas_dashboard/enabled/_7010_project_firewalls_panel.py"
     path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_7010_project_firewalls_panel.py"
     state: "{{ (horizon_enable_neutron_fwaas | bool) | ternary('link', 'absent') }}"
+  - src: "{{ horizon_lib_dir }}/octavia_dashboard/enabled/_1482_project_load_balancer_panel.py"
+    path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled/_1482_project_load_balancer_panel.py"
+    state: "{{ (horizon_enable_octavia_ui | bool) | ternary('link', 'absent') }}"

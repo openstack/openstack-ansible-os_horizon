@@ -32,6 +32,10 @@ horizon_git_install_branch: "stable/queens"
 magnum_dashboard_git_repo: https://git.openstack.org/openstack/magnum-ui
 magnum_dashboard_git_install_branch: "master" # "stable/queens" isn't branched yet.
 
+## The git source/branch for the Octavia UI plugin
+octavia_dashboard_git_repo: https://git.openstack.org/openstack/octavia-dashboard
+octavia_dashboard_git_install_branch: master
+
 ## The git source/branch for the Designate UI plugin
 designate_dashboard_git_repo: https://git.openstack.org/openstack/designate-dashboard
 designate_dashboard_git_install_branch: "stable/queens"
@@ -203,6 +207,9 @@ horizon_enable_ironic_ui: False
 ## Magnum UI Panel
 horizon_enable_magnum_ui: False
 
+## Magnum UI Panel
+horizon_enable_octavia_ui: False
+
 ## Sahara UI Panel
 horizon_enable_sahara_ui: False
 
@@ -305,6 +312,7 @@ horizon_pip_packages:
   - sahara_dashboard
   - trove_dashboard
   - designate_dashboard
+  - octavia_dashboard
 
 # This variable is used to install additional pip packages
 # that could be needed for additional dashboards
