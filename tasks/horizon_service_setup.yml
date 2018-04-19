@@ -31,6 +31,7 @@
     - keystone_service_adminurl is defined
     - keystone_service_adminuri_insecure is defined
   register: add_member_role
+  no_log: true
   until: add_member_role|success
   retries: 5
   delay: 10
