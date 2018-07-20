@@ -118,6 +118,8 @@ horizon_can_set_password: False
 horizon_enable_cinder_backup: False
 # Enables IPv6 support in Horizon, such as managing network subnets
 horizon_enable_ipv6: True
+# Enables router support in Horizon, disable if you don't have Neutron L3 agent
+horizon_enable_router: True
 
 # Disable/Enable simplified floating IP address management for deployments with
 # multiple floating IP pools or complex network requirements.
