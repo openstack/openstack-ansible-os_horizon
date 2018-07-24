@@ -39,25 +39,25 @@
   tags:
     - always
 
-- include: horizon_pre_install.yml
+- include_tasks: horizon_pre_install.yml
   tags:
     - horizon-install
 
-- include: horizon_install.yml
+- include_tasks: horizon_install.yml
   tags:
     - horizon-install
 
-- include: horizon_post_install.yml
+- include_tasks: horizon_post_install.yml
   tags:
     - horizon-config
 
-- include: horizon_db_setup.yml
+- include_tasks: horizon_db_setup.yml
   static: no
   when: inventory_hostname == ansible_play_hosts[0]
   tags:
     - horizon-config
 
-- include: horizon_ssl_self_signed.yml
+- include_tasks: horizon_ssl_self_signed.yml
   static: no
   when:
     - not horizon_external_ssl | bool
@@ -65,7 +65,7 @@
   tags:
     - horizon-config
 
-- include: horizon_ssl_user_provided.yml
+- include_tasks: horizon_ssl_user_provided.yml
   static: no
   when: not horizon_external_ssl | bool
   tags:
@@ -80,7 +80,7 @@
     - horizon-config
     - horizon-ssl
 
-- include: horizon_service_setup.yml
+- include_tasks: horizon_service_setup.yml
   tags:
     - horizon-config
 
@@ -114,11 +114,11 @@
   tags:
     - horizon-config
 
-- include: horizon_apache.yml
+- include_tasks: horizon_apache.yml
   tags:
     - horizon-config
 
-- include: horizon_translations_update.yml
+- include_tasks: horizon_translations_update.yml
   when: horizon_translations_update | bool
   tags:
     - horizon-config
