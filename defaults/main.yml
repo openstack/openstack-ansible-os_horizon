@@ -260,9 +260,12 @@ _horizon_available_themes:
     theme_label: "Material"
     theme_path: "themes/material"
 
-# Add custom themes. Deployers need to place the theme directories
-# and files on the horizon containers in:
-#   {{ horizon_lib_dir }}/openstack_dashboard/themes
+# Add custom themes. Deployers need to place the archive, with the theme inside,
+# into the directory, which is specified by theme_src_archive key.
+# It should be an absolute path to the archive on the deployment host.
+# Leading folders are not expected in the archive.
+# Following archive formats are supported:
+# .tar.gz, .tgz, .zip, .tar.bz, .tar.bz2, .tbz, .tbz2
 # See https://docs.openstack.org/horizon/latest/configuration/themes.html
 # for more details on custom themes
 # Example:
@@ -272,6 +275,7 @@ _horizon_available_themes:
 #     theme_name: "custom"
 #     theme_label: "Custom"
 #     theme_path: "themes/custom"
+#     theme_src_archive: "/etc/openstack_deploy/horizon/themes/custom.tar.gz"
 #
 horizon_custom_themes: {}
 
