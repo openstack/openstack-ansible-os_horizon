@@ -96,6 +96,25 @@
   notify: Restart apache2
   when: horizon_customization_module is defined
 
+- name: Creating horizon custom theme path
+  file:
+    path: "{{ horizon_lib_dir }}/openstack_dashboard/{{ item.value.theme_path }}/"
+    state: directory
+    owner: "{{ horizon_system_user_name }}"
+    group: "{{ horizon_system_group_name }}"
+    mode: "0755"
+  with_dict: "{{ horizon_custom_themes }}"
+
+- name: Drop horizon custom themes
+  unarchive:
+    src: "{{ item.value.theme_src_archive }}"
+    dest: "{{ horizon_lib_dir }}/openstack_dashboard/{{ item.value.theme_path }}/"
+    owner: "{{ horizon_system_user_name }}"
+    group: "{{ horizon_system_group_name }}"
+  with_dict: "{{ horizon_custom_themes }}"
+  when: item.value.theme_src_archive is defined
+  notify: Restart apache2
+
 - name: Compile messages for translation
   command: "{{ horizon_manage }} compilemessages"
   become: yes
