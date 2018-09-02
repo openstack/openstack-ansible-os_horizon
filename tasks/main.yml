@@ -52,13 +52,11 @@
     - horizon-config
 
 - include_tasks: horizon_db_setup.yml
-  static: no
   when: inventory_hostname == ansible_play_hosts[0]
   tags:
     - horizon-config
 
 - include_tasks: horizon_ssl_self_signed.yml
-  static: no
   when:
     - not horizon_external_ssl | bool
     - horizon_user_ssl_cert is not defined or horizon_user_ssl_key is not defined
@@ -66,7 +64,6 @@
     - horizon-config
 
 - include_tasks: horizon_ssl_user_provided.yml
-  static: no
   when: not horizon_external_ssl | bool
   tags:
     - horizon-config
