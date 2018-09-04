@@ -26,7 +26,7 @@ tempest_dashboard_url: "https://{{ hostvars[groups['horizon_all'][0]]['ansible_h
 tempest_plugins:
   - name: tempest-horizon
     repo: https://github.com/openstack/tempest-horizon
-    branch: master
+    branch: 6490739059135e05b7fee75ee083701b4c8aa097
 
 tempest_test_whitelist:
   - tempest_horizon.tests.scenario.test_dashboard_basic_ops.TestDashboardBasicOps
