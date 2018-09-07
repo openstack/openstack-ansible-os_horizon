@@ -23,7 +23,6 @@
         - openstack-ansible-functional-distro_install-centos-7
         - openstack-ansible-functional-distro_install-opensuse-423
         - openstack-ansible-functional-distro_install-ubuntu-xenial
-        - openstack-ansible-horizon-ssl-nv
     gate:
       jobs:
         - openstack-ansible-functional-distro_install-centos-7
