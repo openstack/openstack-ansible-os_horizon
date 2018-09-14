@@ -34,27 +34,27 @@ horizon_developer_mode: false
 
 ## The git source/branch for Horizon
 horizon_git_repo: https://git.openstack.org/openstack/horizon
-horizon_git_install_branch: master
+horizon_git_install_branch: 'stable/rocky'
 
 ## The git source/branch for the Magnum UI plugin
 magnum_dashboard_git_repo: https://git.openstack.org/openstack/magnum-ui
-magnum_dashboard_git_install_branch: master
+magnum_dashboard_git_install_branch: 'stable/rocky'
 
 ## The git source/branch for the Octavia UI plugin
 octavia_dashboard_git_repo: https://git.openstack.org/openstack/octavia-dashboard
-octavia_dashboard_git_install_branch: master
+octavia_dashboard_git_install_branch: 'stable/rocky'
 
 ## The git source/branch for the Designate UI plugin
 designate_dashboard_git_repo: https://git.openstack.org/openstack/designate-dashboard
-designate_dashboard_git_install_branch: master
+designate_dashboard_git_install_branch: 'stable/rocky'
 
 ## The git source/branch for the Trove UI plugin
 trove_dashboard_git_repo: https://git.openstack.org/openstack/trove-dashboard
-trove_dashboard_git_install_branch: master
+trove_dashboard_git_install_branch: 'stable/rocky'
 
 ## The git source/branch for the Heat UI plugin
 heat_dashboard_git_repo: https://git.openstack.org/openstack/heat-dashboard
-heat_dashboard_git_install_branch: master
+heat_dashboard_git_install_branch: 'stable/rocky'
 
 ## The packages to build from source (used in developer mode)
 horizon_developer_constraints:
