@@ -28,9 +28,7 @@ horizon_distro_packages:
   - cronie
   - cronie-anacron
   - gettext
-  - python-MySQL-python
   - which
-  - MariaDB-devel           # required to build MySQL-python
 
 horizon_service_distro_packages:
   - openstack-horizon-plugin-designate-ui
@@ -46,6 +44,7 @@ horizon_service_distro_packages:
   - openstack-horizon-plugin-trove-ui
   - python-horizon
   - python-memcached
+  - python-PyMySQL
 
 # SUSE does not currently have packages for the following dashboards
 horizon_enable_heat_ui: False

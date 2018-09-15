@@ -20,7 +20,6 @@ horizon_system_service_name: apache2
 
 horizon_devel_distro_packages:
   - git
-  - libmariadbclient-dev    # required to build MySQL-python
   - libssl-dev
   - libxslt1.1
   - openssl
@@ -31,7 +30,6 @@ horizon_distro_packages:
   - cron # required by the Ansible cron module
   - gettext
   - libapache2-mod-wsgi
-  - python-mysqldb # required by the Ansible mysql_db module
 
 horizon_service_distro_packages:
   - openstack-dashboard

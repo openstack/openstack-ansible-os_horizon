@@ -29,9 +29,7 @@ horizon_distro_packages:
   - httpd-tools
   - mod_ssl
   - mod_wsgi
-  - MySQL-python
   - which
-  - MariaDB-devel           # required to build MySQL-python
 
 horizon_service_distro_packages:
   - openstack-designate-ui
@@ -45,6 +43,7 @@ horizon_service_distro_packages:
   - openstack-octavia-ui
   - python-django-horizon
   - python-memcached
+  - python-PyMySQL
 
 horizon_apache_conf: "/etc/httpd/conf/httpd.conf"
 horizon_apache_default_log_folder: "/var/log/httpd"
