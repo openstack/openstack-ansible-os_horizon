@@ -307,7 +307,6 @@ horizon_pip_packages:
   - ironic-ui
   - magnum-ui
   - keystonemiddleware
-  - MySQL-python
   - PyMySQL
   - neutron-lbaas-dashboard
   - neutron-fwaas-dashboard

@@ -13,7 +13,10 @@
 # under the License.
 
 import os
+import pymysql
 import sys
+
+pymysql.install_as_MySQLdb()
 
 from django.core.management import execute_from_command_line  # noqa
 
