@@ -27,7 +27,6 @@ horizon_distro_packages:
   - libssl-dev
   - libxslt1.1
   - openssl
-  - python-mysqldb # required by the Ansible mysql_db module
   - gettext
 
 horizon_apache_conf: "/etc/apache2/apache2.conf"

@@ -24,7 +24,6 @@ horizon_distro_packages:
   - apache2-utils
   - libxslt-devel
   - apache2-mod_wsgi
-  - python-MySQL-python
   - openssl
   - libopenssl-devel
   - which
