@@ -172,11 +172,21 @@ horizon_ssl_self_signed_subject: "/C=US/ST=Texas/L=San Antonio/O=IT/CN={{ horizo
 # horizon_user_ssl_key: <path to cert on ansible deployment host>
 # horizon_user_ssl_ca_cert: <path to cert on ansible deployment host>
 
-# Set this to True if you do ssl termination on an external device, like the
-# load balancer
-horizon_external_ssl: false
+# Toggle whether horizon should be served via SSL
+horizon_enable_ssl: "{{ (haproxy_ssl | default(True)) | bool }}"
+
+# Toggle whether horizon is served via an external device, like a load
+# balancer. This enables the use of the horizon_secure_proxy_ssl_header
+# in the web server configuration.
+# Note (odyssey4me):
+# This variable is actually badly named, as it applies
+# settings which have nothing to do with SSL.
+horizon_external_ssl: "{{ (openstack_external_ssl | default(False)) | bool }}"
 
 # Set this to the header that your device sets when doing ssl termination
+# Note (odyssey4me):
+# This variable is actually badly named, as it applies
+# settings which have nothing to do with SSL.
 horizon_secure_proxy_ssl_header: "X-Forwarded-Proto"
 horizon_secure_proxy_ssl_header_django: "HTTP_{{ horizon_secure_proxy_ssl_header | replace('-', '_') | upper }}"
 

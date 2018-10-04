@@ -37,7 +37,7 @@ WEBROOT = '{{ horizon_webroot }}'
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
 
-{% if horizon_external_ssl | bool %}
+{% if (horizon_enable_ssl | bool) and (horizon_external_ssl | bool) %}
 # Set SSL proxy settings:
 # For Django 1.4+ pass this header from the proxy after terminating the SSL,
 # and don't forget to strip it from the client's request.
@@ -46,10 +46,17 @@ ALLOWED_HOSTS = ['*']
 SECURE_PROXY_SSL_HEADER = ('{{ horizon_secure_proxy_ssl_header_django }}', 'https')
 {% endif %}
 
+{% if horizon_enable_ssl | bool %}
 # If Horizon is being served through SSL, then uncomment the following two
 # settings to better secure the cookies from security exploits
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+{% else %}
+# If Horizon is being served through SSL, then uncomment the following two
+# settings to better secure the cookies from security exploits
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+{% endif %}
 
 # Define the time after which a Horizon session expires
 SESSION_TIMEOUT = {{ horizon_session_timeout }}
