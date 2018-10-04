@@ -37,3 +37,8 @@ tempest_tempest_conf_overrides:
 
 horizon_config_overrides:
   X_TEST_OPTION: True
+
+# This has to be set here because the common test-vars
+# has haproxy_ssl set to no.
+horizon_enable_ssl: yes
+
