@@ -45,22 +45,26 @@
 - include: horizon_ssl_self_signed.yml
   static: no
   when:
-    - not horizon_external_ssl | bool
+    - horizon_enable_ssl | bool
+    - not (horizon_external_ssl | bool)
     - horizon_user_ssl_cert is not defined or horizon_user_ssl_key is not defined
   tags:
     - horizon-config
 
 - include: horizon_ssl_user_provided.yml
   static: no
-  when: not horizon_external_ssl | bool
+  when:
+    - horizon_enable_ssl | bool
+    - not (horizon_external_ssl | bool)
   tags:
     - horizon-config
 
 - name: Update the ca certificates
   command: "update-ca-certificates -f"
   when:
-   - not horizon_external_ssl | bool
-   - ansible_pkg_mgr == 'apt'
+    - horizon_enable_ssl | bool
+    - not (horizon_external_ssl | bool)
+    - ansible_pkg_mgr == 'apt'
   tags:
     - horizon-config
     - horizon-ssl

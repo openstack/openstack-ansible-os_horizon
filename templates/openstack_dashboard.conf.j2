@@ -1,6 +1,8 @@
 # {{ ansible_managed }}
 
-{% if not horizon_external_ssl | bool %}
+# If horizon is being served via SSL from this web server,
+# then we must redirect HTTP requests to HTTPS.
+{% if (horizon_enable_ssl | bool) and not (horizon_external_ssl | bool) %}
 <VirtualHost *:80>
     ServerName {{ horizon_server_name }}
     RewriteEngine On
@@ -9,14 +11,16 @@
 </VirtualHost>
 {% endif %}
 
-<VirtualHost *:{% if not horizon_external_ssl | bool %}443{% else %}80{% endif %}>
+# If horizon is being served via SSL via a load balancer, we
+# need to listen via HTTP on this web server. If SSL is not
+# enabled, then the same applies.
+<VirtualHost *:{{ ((horizon_enable_ssl | bool) and not (horizon_external_ssl | bool)) | ternary('443', '80') }}>
     ServerName {{ horizon_server_name }}
-
     LogLevel  {{ horizon_log_level }}
     ErrorLog  /var/log/horizon/horizon-error.log
     CustomLog /var/log/horizon/ssl_access.log {{ horizon_apache_custom_log_format }}
     Options +FollowSymLinks
-{% if not horizon_external_ssl | bool %}
+{% if (horizon_enable_ssl | bool) and not (horizon_external_ssl | bool) %}
     SSLEngine on
     SSLCertificateFile    {{ horizon_ssl_cert }}
     SSLCertificateKeyFile {{ horizon_ssl_key }}
@@ -24,12 +28,15 @@
     SSLCACertificateFile  {{ horizon_ssl_ca_cert }}
     {% endif -%}
     SSLCompression Off
-    SSLProtocol {{ horizon_ssl_protocol }} 
+    SSLProtocol {{ horizon_ssl_protocol }}
     SSLHonorCipherOrder On
     SSLCipherSuite {{ horizon_ssl_cipher_suite }}
     SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
-{% else %}
+{% endif %}
+{% if (horizon_enable_ssl | bool) and (horizon_external_ssl | bool) %}
     RequestHeader set {{ horizon_secure_proxy_ssl_header }} "https"
+{% elif not (horizon_enable_ssl | bool) and (horizon_external_ssl | bool) %}
+    RequestHeader set {{ horizon_secure_proxy_ssl_header }} "http"
 {% endif %}
 
     WSGIScriptAlias / {{ horizon_lib_wsgi_file }}
