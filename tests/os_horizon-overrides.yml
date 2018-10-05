@@ -15,8 +15,6 @@
 
 horizon_developer_mode: true
 horizon_venv_tag: "testing"
-horizon_git_install_branch: master
-horizon_requirements_git_install_branch: master
 horizon_galera_address: "{{ test_galera_host }}"
 horizon_galera_database: dash
 horizon_galera_user: dash
@@ -40,22 +38,6 @@ nova_service_adminuri: "{{ nova_service_proto }}://{{ internal_lb_vip_address }}
 nova_service_adminurl: "{{ nova_service_adminuri }}/v2.1/%(tenant_id)s"
 nova_service_internaluri: "{{ nova_service_proto }}://{{ internal_lb_vip_address }}:{{ nova_service_port }}"
 nova_service_internalurl: "{{ nova_service_internaluri }}/v2.1/%(tenant_id)s"
-
-tempest_run: yes
-tempest_dashboard_login_url: "https://{{ hostvars[groups['horizon_all'][0]]['ansible_host'] }}/auth/login/"
-tempest_dashboard_url: "https://{{ hostvars[groups['horizon_all'][0]]['ansible_host'] }}/"
-
-tempest_plugins:
-  - name: tempest-horizon
-    repo: https://github.com/openstack/tempest-horizon
-    branch: master
-
-tempest_test_whitelist:
-  - tempest_horizon.tests.scenario.test_dashboard_basic_ops.TestDashboardBasicOps
-
-tempest_tempest_conf_overrides:
-  dashboard:
-    disable_ssl_certificate_validation: True
 
 horizon_config_overrides:
   X_TEST_OPTION: True
