@@ -48,7 +48,7 @@
 - name: Register DB session cleanup cron
   cron:
     name: "Clear out expired sessions"
-    minute: "{{ 58 | random(start=2) }}"
+    minute: "{{ 58 | random(seed=inventory_hostname, start=2) }}"
     hour: 21
     job: "{{ horizon_manage }} clearsessions"
     user: "{{ horizon_system_user_name }}"
