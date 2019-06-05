@@ -13,6 +13,8 @@ pymysql.install_as_MySQLdb()
 DEBUG = {{ debug }}
 TEMPLATE_DEBUG = DEBUG
 
+STATIC_ROOT = '{{ horizon_lib_dir }}/static'
+
 # Django Compressor Settings. For more information, see:
 # http://django-compressor.readthedocs.org/en/latest/settings/
 COMPRESS_OFFLINE = True
@@ -179,6 +181,11 @@ AVAILABLE_REGIONS = [
 {% endfor %}
 ]
 {% endif %}
+
+LOCALE_PATHS = [
+    'horizon/locale',
+    'openstack_dashboard/locale',
+]
 
 OPENSTACK_KEYSTONE_URL = "{{ horizon_keystone_endpoint }}"
 
