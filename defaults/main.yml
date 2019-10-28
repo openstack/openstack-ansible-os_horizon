@@ -206,6 +206,9 @@ horizon_keystone_endpoint: "{{ keystone_service_internalurl }}"
 horizon_keystone_multidomain_support: False
 horizon_keystone_default_domain: Default
 
+# Enable/disable v2 openrc file download in horizon.
+horizon_show_keystone_v2_rc: True
+
 ### Set the cacert pem for Keystone if you'd like Horizon to verify it.
 # horizon_cacert_pem: /path/to/cacert.pem
 
