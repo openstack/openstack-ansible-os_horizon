@@ -14,7 +14,7 @@
 # If horizon is being served via SSL via a load balancer, we
 # need to listen via HTTP on this web server. If SSL is not
 # enabled, then the same applies.
-<VirtualHost {{ horizon_bind_address }}:{{ ((horizon_enable_ssl | bool) and not (horizon_external_ssl | bool)) | ternary('horizon_listen_ports.https', 'horizon_listen_ports.http') }}>
+<VirtualHost {{ horizon_bind_address }}:{{ ((horizon_enable_ssl | bool) and not (horizon_external_ssl | bool)) | ternary(horizon_listen_ports.https, horizon_listen_ports.http) }}>
     ServerName {{ horizon_server_name }}
     LogLevel  {{ horizon_log_level }}
     ErrorLog  syslog:daemon
