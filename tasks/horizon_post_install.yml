@@ -55,6 +55,15 @@
     state: "{{ item.state }}"
   with_items: "{{ horizon_panels }}"
   notify: Restart apache2
+  when: horizon_install_method == 'source'
+
+- name: Enable project panels
+  package:
+    name: "{{ item.package }}"
+    state: "{{ item.state }}"
+  with_items: "{{ horizon_ui_distro_packages }}"
+  notify: Restart apache2
+  when: horizon_install_method == 'distro' and horizon_ui_distro_packages is defined
 
 - name: Create horizon links
   file:
