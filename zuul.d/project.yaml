@@ -23,3 +23,15 @@
       - openstack-ansible-linters
       - publish-openstack-docs-pti
       - release-notes-jobs-python3
+    check:
+      jobs:
+        - openstack-ansible-upgrade-aio_metal-centos-7:
+            voting: false
+        - openstack-ansible-upgrade-aio_metal-ubuntu-bionic:
+            voting: false
+    gate:
+      jobs:
+        - openstack-ansible-upgrade-aio_metal-centos-7:
+            voting: false
+        - openstack-ansible-upgrade-aio_metal-ubuntu-bionic:
+            voting: false
