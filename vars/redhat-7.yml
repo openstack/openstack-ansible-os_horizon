@@ -32,18 +32,30 @@ horizon_distro_packages:
   - which
 
 horizon_service_distro_packages:
-  - openstack-designate-ui
-  - openstack-heat-ui
-  - openstack-ironic-ui
-  - openstack-magnum-ui
-  - openstack-manila-ui
-  - openstack-neutron-lbaas-ui
-  - openstack-sahara-ui
-  - openstack-trove-ui
-  - openstack-octavia-ui
+  - openstack-dashboard
   - python-django-horizon
   - python-memcached
   - python-PyMySQL
+
+horizon_ui_distro_packages:
+  - package: openstack-designate-ui
+    state: "{{ horizon_enable_designate_ui | ternary(horizon_package_state, 'absent') }}"
+  - package: openstack-heat-ui
+    state: "{{ horizon_enable_heat_ui | ternary(horizon_package_state, 'absent') }}"
+  - package: openstack-ironic-ui
+    state: "{{ horizon_enable_ironic_ui | ternary(horizon_package_state, 'absent') }}"
+  - package: openstack-magnum-ui
+    state: "{{ horizon_enable_magnum_ui | ternary(horizon_package_state, 'absent') }}"
+  - package: openstack-manila-ui
+    state: "{{ horizon_enable_manila_ui | ternary(horizon_package_state, 'absent') }}"
+  - package: openstack-neutron-lbaas-ui
+    state: "{{ horizon_enable_neutron_lbaas | ternary(horizon_package_state, 'absent') }}"
+  - package: openstack-sahara-ui
+    state: "{{ horizon_enable_sahara_ui | ternary(horizon_package_state, 'absent') }}"
+  - package: openstack-trove-ui
+    state: "{{ horizon_enable_trove_ui | ternary(horizon_package_state, 'absent') }}"
+  - package: openstack-octavia-ui
+    state: "{{ horizon_enable_octavia_ui | ternary(horizon_package_state, 'absent') }}"
 
 horizon_apache_conf: "/etc/httpd/conf/httpd.conf"
 horizon_apache_default_log_folder: "/var/log/httpd"

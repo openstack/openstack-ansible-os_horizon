@@ -230,13 +230,16 @@ horizon_launch_instance_defaults:
   disable_volume_snapshot: False
   create_volume: True
 
-## horizon UI Panel
+## Ironic UI Panel
 horizon_enable_ironic_ui: False
 
 ## Magnum UI Panel
 horizon_enable_magnum_ui: False
 
-## Magnum UI Panel
+## Manila UI Panel
+horizon_enable_manila_ui: False
+
+## Octavia UI Panel
 horizon_enable_octavia_ui: False
 
 ## Sahara UI Panel
@@ -254,6 +257,7 @@ horizon_enable_heat_ui: False
 ## Neutron features to enable
 horizon_enable_neutron_lbaas: False
 horizon_enable_neutron_fwaas: False
+horizon_enable_neutron_vpnaas: False
 
 ## Swift
 horizon_swift_file_transfer_chunk_size: 524288
