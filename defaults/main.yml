@@ -34,64 +34,65 @@ horizon_venv_python_executable: "{{ openstack_venv_python_executable | default('
 horizon_upper_constraints_url: "{{ requirements_git_url | default('https://git.openstack.org/cgit/openstack/requirements/plain/upper-constraints.txt?h=' ~ requirements_git_install_branch | default('master')) }}"
 
 ## The git source/branch for Horizon
-horizon_git_repo: https://git.openstack.org/openstack/horizon
-horizon_git_install_branch: master
+horizon_git_repo: https://opendev.org/openstack/horizon
+horizon_git_track_branch: stable/train
+horizon_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Blazar UI plugin
-blazar_dashboard_git_repo: https://git.openstack.org/openstack/blazar-dashboard
-blazar_dashboard_git_install_branch: master
+blazar_dashboard_git_repo: https://opendev.org/openstack/blazar-dashboard
+blazar_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for Cloudkitty UI plugin
-cloudkitty_dashboard_git_repo: https://git.openstack.org/openstack/cloudkitty-dashboard
-cloudkitty_dashboard_git_install_branch: master
+cloudkitty_dashboard_git_repo: https://opendev.org/openstack/cloudkitty-dashboard
+cloudkitty_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Magnum UI plugin
-magnum_dashboard_git_repo: https://git.openstack.org/openstack/magnum-ui
-magnum_dashboard_git_install_branch: master
+magnum_dashboard_git_repo: https://opendev.org/openstack/magnum-ui
+magnum_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Manila UI plugin
-manila_dashboard_git_repo: https://git.openstack.org/openstack/manila-ui.git
-manila_dashboard_git_install_branch: master
+manila_dashboard_git_repo: https://opendev.org/openstack/manila-ui.git
+manila_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Masakari UI plugin
-masakari_dashboard_git_repo: https://git.openstack.org/openstack/masakari-dashboard
-masakari_dashboard_git_install_branch: master
+masakari_dashboard_git_repo: https://opendev.org/openstack/masakari-dashboard
+masakari_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Mistral UI plugin
-mistral_dashboard_git_repo: https://git.openstack.org/openstack/mistral-dashboard.git
-mistral_dashboard_git_install_branch: master
+mistral_dashboard_git_repo: https://opendev.org/openstack/mistral-dashboard.git
+mistral_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Octavia UI plugin
-octavia_dashboard_git_repo: https://git.openstack.org/openstack/octavia-dashboard
-octavia_dashboard_git_install_branch: master
+octavia_dashboard_git_repo: https://opendev.org/openstack/octavia-dashboard
+octavia_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Designate UI plugin
-designate_dashboard_git_repo: https://git.openstack.org/openstack/designate-dashboard
-designate_dashboard_git_install_branch: master
+designate_dashboard_git_repo: https://opendev.org/openstack/designate-dashboard
+designate_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Tacker UI plugin
-tacker_dashboard_git_repo: https://git.openstack.org/openstack/tacker-horizon
-tacker_dashboard_git_install_branch: master
+tacker_dashboard_git_repo: https://opendev.org/openstack/tacker-horizon
+tacker_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Trove UI plugin
-trove_dashboard_git_repo: https://git.openstack.org/openstack/trove-dashboard
-trove_dashboard_git_install_branch: master
+trove_dashboard_git_repo: https://opendev.org/openstack/trove-dashboard
+trove_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Heat UI plugin
-heat_dashboard_git_repo: https://git.openstack.org/openstack/heat-dashboard
-heat_dashboard_git_install_branch: master
+heat_dashboard_git_repo: https://opendev.org/openstack/heat-dashboard
+heat_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Watcher UI plugin
-watcher_dashboard_git_repo: https://git.openstack.org/openstack/watcher-dashboard
-watcher_dashboard_git_install_branch: master
+watcher_dashboard_git_repo: https://opendev.org/openstack/watcher-dashboard
+watcher_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The git source/branch for the Zun UI plugin
-zun_dashboard_git_repo: https://git.openstack.org/openstack/zun-ui
-zun_dashboard_git_install_branch: master
+zun_dashboard_git_repo: https://opendev.org/openstack/zun-ui
+zun_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 # The git source/branch for the Neutron VPNaaS UI plugin
-neutron_vpnaas_dashboard_git_repo: https://git.openstack.org/openstack/neutron-vpnaas-dashboard
-neutron_vpnaas_dashboard_git_install_branch: master
+neutron_vpnaas_dashboard_git_repo: https://opendev.org/openstack/neutron-vpnaas-dashboard
+neutron_vpnaas_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
 ## The packages to build from source
 horizon_git_constraints:
