@@ -82,6 +82,9 @@
     - horizon-ssl
 
 - import_tasks: horizon_service_setup.yml
+  when:
+    - ('horizon_all' in group_names)
+    - inventory_hostname == groups['horizon_all'][0]
   tags:
     - horizon-config
 
