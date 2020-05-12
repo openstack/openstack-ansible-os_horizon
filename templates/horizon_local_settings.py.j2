@@ -27,6 +27,12 @@ COMPRESS_ROOT = '{{ horizon_lib_dir }}/static'
 WEBROOT = '{{ horizon_webroot }}'
 #LOGIN_URL = WEBROOT + 'auth/login/'
 #LOGOUT_URL = WEBROOT + 'auth/logout/'
+{% if horizon_login_url is defined %}
+LOGIN_URL = '{{ horizon_login_url }}'
+{% endif %}
+{% if horizon_logout_url is defined %}
+LOGOUT_URL = '{{ horizon_logout_url }}'
+{% endif %}
 #
 # LOGIN_REDIRECT_URL can be used as an alternative for
 # HORIZON_CONFIG.user_home, if user_home is not set.
@@ -200,6 +206,10 @@ WEBSSO_ENABLED = True
 
 # Determines which authentication choice to show as default.
 WEBSSO_INITIAL_CHOICE = "{{ horizon_websso_initial_choice }}"
+
+{% if horizon_websso_keystone_url is defined %}
+WEBSSO_KEYSTONE_URL = "{{ horizon_websso_keystone_url }}"
+{% endif %}
 
 # The list of authentication mechanisms which include keystone
 # federation protocols and identity provider/federation protocol
