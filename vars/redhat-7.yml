@@ -20,6 +20,7 @@ horizon_devel_distro_packages:
   - libxslt-devel
   - openssl
   - openssl-libs
+  - httpd-devel
   - pcre-devel
 
 horizon_distro_packages:
@@ -29,8 +30,10 @@ horizon_distro_packages:
   - httpd
   - httpd-tools
   - mod_ssl
-  - mod_wsgi
   - which
+
+horizon_service_pip_packages:
+  - mod-wsgi
 
 horizon_service_distro_packages:
   - openstack-designate-ui

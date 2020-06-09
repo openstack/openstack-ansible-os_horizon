@@ -45,7 +45,9 @@
     venv_install_destination_path: "{{ horizon_bin | dirname }}"
     venv_pip_install_args: "{{ horizon_pip_install_args }}"
     venv_pip_packages: >-
-      {{ horizon_pip_packages | union(horizon_user_pip_packages) + horizon_optional_pip_packages +
+      {{ horizon_pip_packages | union(horizon_user_pip_packages) +
+         horizon_optional_pip_packages +
+         horizon_service_pip_packages | default([]) +
          (horizon_enable_blazar_ui | bool) | ternary(horizon_blazar_optional_pip_packages, []) +
          (horizon_enable_cloudkitty_ui | bool) | ternary(horizon_cloudkitty_optional_pip_packages, []) +
          (horizon_enable_designate_ui | bool) | ternary(horizon_designate_optional_pip_packages, []) +
@@ -160,4 +162,10 @@
   with_items: "{{ found_panels.files }}"
   notify:
     - Compile messages
+    - Restart apache2
+
+- name: Register wsgi module
+  shell: "{{ horizon_bin }}/mod_wsgi-express install-module > /etc/httpd/conf.modules.d/02-wsgi.conf"
+  when: ansible_os_family | lower == 'redhat' and ansible_distribution_major_version is version('7', '=')
+  notify:
     - Restart apache2
