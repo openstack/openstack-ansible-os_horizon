@@ -98,6 +98,7 @@ horizon_git_constraints:
   - "git+{{ horizon_git_repo }}@{{ horizon_git_install_branch }}#egg=horizon"
   - "git+{{ blazar_dashboard_git_repo }}@{{ blazar_dashboard_git_install_branch }}#egg=blazar-dashboard"
   - "git+{{ cloudkitty_dashboard_git_repo }}@{{ cloudkitty_dashboard_git_install_branch }}#egg=cloudkitty_dashboard"
+  - "git+{{ octavia_dashboard_git_repo }}@{{ octavia_dashboard_git_install_branch }}#egg=octavia_dashboard"
   - "git+{{ magnum_dashboard_git_repo }}@{{ magnum_dashboard_git_install_branch }}#egg=magnum-ui"
   - "git+{{ manila_dashboard_git_repo }}@{{ manila_dashboard_git_install_branch }}#egg=manila-ui"
   - "git+{{ masakari_dashboard_git_repo }}@{{ masakari_dashboard_git_install_branch }}#egg=masakari_dashboard"
