@@ -200,7 +200,7 @@ WEBSSO_CHOICES = (
     ("credentials", _("Keystone Credentials")),
 {% for idp in keystone_sp.trusted_idp_list %}
 {% for protocol in idp.protocols %}
-    ("{{ protocol.name }}", _("{{ idp.name }}")){% if not loop.last %},{% endif %}
+    ("{{ protocol.name }}", _("{{ idp.display_name | default(idp.name) }}")){% if not loop.last %},{% endif %}
 {% endfor %}
 {% endfor %}
 )
