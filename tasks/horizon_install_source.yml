@@ -77,6 +77,8 @@
     file_type: directory
     recurse: no
   register: _horizon_python_venv_details
+  tags:
+    - horizon-config
 
 - name: Set python lib dir fact
   set_fact:
