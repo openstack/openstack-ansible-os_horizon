@@ -38,6 +38,10 @@ horizon_git_repo: https://opendev.org/openstack/horizon
 horizon_git_track_branch: master
 horizon_git_install_branch: "{{ horizon_git_track_branch }}"
 
+## The git source/branch for the Barbican UI plugin
+barbican_dashboard_git_repo: https://opendev.org/openstack/barbican-ui
+barbican_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
+
 ## The git source/branch for the Blazar UI plugin
 blazar_dashboard_git_repo: https://opendev.org/openstack/blazar-dashboard
 blazar_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
@@ -296,6 +300,9 @@ horizon_launch_instance_defaults:
   disable_volume_snapshot: False
   create_volume: True
 
+## Barbican UI Panel
+horizon_enable_barbican_ui: "{{ (groups['barbican_all'] is defined) and (groups['barbican_all'] | length > 0) }}"
+
 ## Blazar UI Panel
 horizon_enable_blazar_ui: False
 
@@ -426,6 +433,8 @@ horizon_user_pip_packages: []
 # Optional pip packages for additional dashboards
 # TODO(odyssey4me):
 # Simplify this when we are no longer using the py_pkgs plugin
+horizon_barbican_optional_pip_packages:
+  - "git+{{ barbican_dashboard_git_repo }}@{{ barbican_dashboard_git_install_branch }}#egg=barbican-ui"
 horizon_blazar_optional_pip_packages:
   - blazar_dashboard
 horizon_cloudkitty_optional_pip_packages:
