@@ -107,14 +107,18 @@
   when: item.value.theme_src_archive is defined
   notify: Restart apache2
 
-- name: Collect and compress static files
-  command: "{{ item }}"
+- name: Collect static files
+  command: "{{ horizon_manage }} collectstatic --noinput"
   become: yes
   become_user: "{{ horizon_system_user_name }}"
   changed_when: false
-  with_items:
-    - "{{ horizon_manage }} collectstatic --noinput"
-    - "{{ horizon_manage }} compress --force"
+  notify: Restart apache2
+
+- name: Compress static files
+  command: "{{ horizon_manage }} compress --force"
+  become: yes
+  become_user: "{{ horizon_system_user_name }}"
+  changed_when: false
   notify: Restart apache2
   register: async_compress_static_files
   async: 600

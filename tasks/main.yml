@@ -105,16 +105,14 @@
 # since the original task ran as that user. This task will fail if it is run
 # as root because the async status file is within the horizon user's home
 # directory, not root's home directory.
-- name: Ensure static files are collected and compressed
+- name: Ensure static files are compressed
   async_status:
-    jid: "{{ item.ansible_job_id }}"
+    jid: "{{ async_compress_static_files.ansible_job_id }}"
   become: yes
   become_user: "{{ horizon_system_user_name }}"
   register: async_compress_static_files_check
   until: async_compress_static_files_check.finished
   retries: 300
-  with_items:
-    - "{{ async_compress_static_files.results }}"
   tags:
     - horizon-config
 
