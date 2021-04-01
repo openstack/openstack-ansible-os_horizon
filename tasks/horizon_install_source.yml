@@ -48,6 +48,7 @@
       {{ horizon_pip_packages | union(horizon_user_pip_packages) +
          horizon_optional_pip_packages +
          horizon_service_pip_packages | default([]) +
+         (horizon_enable_adjutant_ui | bool) | ternary(horizon_adjutant_optional_pip_packages, []) +
          (horizon_enable_barbican_ui | bool) | ternary(horizon_barbican_optional_pip_packages, []) +
          (horizon_enable_blazar_ui | bool) | ternary(horizon_blazar_optional_pip_packages, []) +
          (horizon_enable_cloudkitty_ui | bool) | ternary(horizon_cloudkitty_optional_pip_packages, []) +

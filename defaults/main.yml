@@ -38,6 +38,10 @@ horizon_git_repo: https://opendev.org/openstack/horizon
 horizon_git_track_branch: master
 horizon_git_install_branch: "{{ horizon_git_track_branch }}"
 
+## The git source/branch for the Adjutant UI plugin
+adjutant_dashboard_git_repo: https://opendev.org/openstack/adjutant-ui
+adjutant_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
+
 ## The git source/branch for the Barbican UI plugin
 barbican_dashboard_git_repo: https://opendev.org/openstack/barbican-ui
 barbican_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
@@ -105,6 +109,7 @@ neutron_vpnaas_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 ## The packages to build from source
 horizon_git_constraints:
   - "git+{{ horizon_git_repo }}@{{ horizon_git_install_branch }}#egg=horizon"
+  - "git+{{ adjutant_dashboard_git_repo }}@{{ adjutant_dashboard_git_install_branch }}#egg=adjutant-ui"
   - "git+{{ blazar_dashboard_git_repo }}@{{ blazar_dashboard_git_install_branch }}#egg=blazar-dashboard"
   - "git+{{ cloudkitty_dashboard_git_repo }}@{{ cloudkitty_dashboard_git_install_branch }}#egg=cloudkitty_dashboard"
   - "git+{{ octavia_dashboard_git_repo }}@{{ octavia_dashboard_git_install_branch }}#egg=octavia_dashboard"
@@ -301,6 +306,9 @@ horizon_launch_instance_defaults:
   disable_volume_snapshot: False
   create_volume: True
 
+## Adjutant UI Panel
+horizon_enable_adjutant_ui: "{{ (groups['adjutant_all'] is defined) and (groups['adjutant_all'] | length > 0) }}"
+
 ## Barbican UI Panel
 horizon_enable_barbican_ui: "{{ (groups['barbican_all'] is defined) and (groups['barbican_all'] | length > 0) }}"
 
@@ -434,6 +442,8 @@ horizon_user_pip_packages: []
 # Optional pip packages for additional dashboards
 # TODO(odyssey4me):
 # Simplify this when we are no longer using the py_pkgs plugin
+horizon_adjutant_optional_pip_packages:
+  - adjutant-ui
 horizon_barbican_optional_pip_packages:
   - barbican-ui
 horizon_blazar_optional_pip_packages:
