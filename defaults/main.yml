@@ -120,6 +120,7 @@ horizon_git_constraints:
   - "git+{{ watcher_dashboard_git_repo }}@{{ watcher_dashboard_git_install_branch }}#egg=watcher_dashboard"
   - "git+{{ zun_dashboard_git_repo }}@{{ zun_dashboard_git_install_branch }}#egg=zun_ui"
   - "git+{{ neutron_vpnaas_dashboard_git_repo }}@{{ neutron_vpnaas_dashboard_git_install_branch }}#egg=neutron_vpnaas_dashboard"
+  - "git+{{ barbican_dashboard_git_repo }}@{{ barbican_dashboard_git_install_branch }}#egg=barbican-ui"
   - --constraint {{ horizon_upper_constraints_url }}
 
 horizon_pip_install_args: "{{ pip_install_options | default('') }}"
@@ -434,7 +435,7 @@ horizon_user_pip_packages: []
 # TODO(odyssey4me):
 # Simplify this when we are no longer using the py_pkgs plugin
 horizon_barbican_optional_pip_packages:
-  - "git+{{ barbican_dashboard_git_repo }}@{{ barbican_dashboard_git_install_branch }}#egg=barbican-ui"
+  - barbican-ui
 horizon_blazar_optional_pip_packages:
   - blazar_dashboard
 horizon_cloudkitty_optional_pip_packages:
