@@ -310,7 +310,8 @@ horizon_launch_instance_defaults:
 horizon_enable_adjutant_ui: "{{ (groups['adjutant_all'] is defined) and (groups['adjutant_all'] | length > 0) }}"
 
 ## Barbican UI Panel
-horizon_enable_barbican_ui: "{{ (groups['barbican_all'] is defined) and (groups['barbican_all'] | length > 0) }}"
+### Barbican UI is just a cookie-cutter scaffolding and does not provide any functionality at this time.
+horizon_enable_barbican_ui: False
 
 ## Blazar UI Panel
 horizon_enable_blazar_ui: False
