@@ -1,5 +1,9 @@
 # {{ ansible_managed }}
 
+{% for horizon_listen_port in horizon_listen_ports.values() %}
+Listen {{ horizon_bind_address }}:{{ horizon_listen_port }}
+{% endfor %}
+
 # If horizon is being served via SSL from this web server,
 # then we must redirect HTTP requests to HTTPS.
 {% if (horizon_enable_ssl | bool) and not (horizon_external_ssl | bool) %}
