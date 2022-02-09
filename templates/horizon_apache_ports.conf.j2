@@ -1,5 +1,6 @@
 # {{ ansible_managed }}
 
-{% for horizon_listen_port in horizon_listen_ports.values() %}
-Listen {{ horizon_bind_address }}:{{ horizon_listen_port }}
-{% endfor %}
+# We place a blank file here
+# Listen commands happen inside the individual VHost files
+# This allows for multiple services VHosts to exist without
+# overwriting Listen lines.
