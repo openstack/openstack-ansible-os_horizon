@@ -41,7 +41,7 @@ LOGOUT_URL = '{{ horizon_logout_url }}'
 # with the list of host/domain names that the application can serve.
 # For more information see:
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = [ "{{ horizon_allowed_hosts | join(',') }}" ]
+ALLOWED_HOSTS = {{ horizon_allowed_hosts | to_json }}
 
 {% if (horizon_enable_ssl | bool) and (horizon_external_ssl | bool) %}
 # Set SSL proxy settings:
