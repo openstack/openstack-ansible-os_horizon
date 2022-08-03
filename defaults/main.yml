@@ -513,3 +513,4 @@ horizon_websso_initial_choice: "credentials"
 horizon_websso_default_redirect: False
 horizon_websso_default_redirect_region: "{{ horizon_websso_keystone_url | default(horizon_keystone_endpoint) }}"
 horizon_websso_default_redirect_logout: ""
+horizon_websso_use_http_referer: True

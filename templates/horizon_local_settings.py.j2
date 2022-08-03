@@ -202,6 +202,8 @@ WEBSSO_DEFAULT_REDIRECT_LOGOUT = "{{ horizon_websso_default_redirect_logout }}"
 {% endif %}
 {% endif %}
 
+WEBSSO_USE_HTTP_REFERER = {{ horizon_websso_use_http_referer | bool }}
+
 # The list of authentication mechanisms which include keystone
 # federation protocols and identity provider/federation protocol
 # mapping keys (WEBSSO_IDP_MAPPING). Current supported protocol
