@@ -202,6 +202,9 @@ horizon_enable_ha_router: False
 # Provide default DNS servers to use when a subnet is created.
 horizon_default_dns_nameservers: []
 
+# Provide list of network types that are available for creation
+horizon_network_provider_types: "{{ neutron_ml2_drivers_type | default(['geneve', 'vlan', 'flat']) }}"
+
 # DISALLOW_IFRAME_EMBED can be used to prevent Horizon from being embedded
 # within an iframe. Legacy browsers are still vulnerable to a Cross-Frame
 # Scripting (XFS) vulnerability, so this option allows extra security hardening
