@@ -290,7 +290,7 @@ horizon_ssl_no_verify: "{{ (keystone_service_adminuri_insecure | bool or keyston
 horizon_ssl_csrf_trusted_origins: []
 
 ## The role which Horizon should use as a default for users
-horizon_default_role_name: _member_
+horizon_default_role_name: member
 
 ## Launch instance
 horizon_launch_instance_legacy: False
