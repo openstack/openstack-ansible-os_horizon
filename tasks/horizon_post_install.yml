@@ -29,15 +29,15 @@
   include_tasks: horizon_post_install_source.yml
   when: horizon_install_method == 'source'
 
-# NOTE(noonedeadpunk): change of permission is required for collectstatic and compilemessages
+# NOTE(noonedeadpunk): change of ownership is required for collectstatic and compilemessages
 - name: Ensure horizon dirs are accessible by user
   file:
     path: "{{ item.path }}"
     state: directory
     owner: "{{ horizon_system_user_name }}"
     group: "{{ horizon_system_group_name }}"
-    mode: "0755"
-    recurse: yes
+    mode: "{{ item.mode | default(omit) }}"
+    recurse: "{{ item.recurse | default(True) }}"
   with_items:
     - { path: "{{ horizon_lib_dir }}", fixup: True }
     - { path: "/etc/openstack-dashboard", fixup: "{{ (ansible_facts['os_family'] | lower) == 'redhat' }}" }
