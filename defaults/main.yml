@@ -426,7 +426,9 @@ horizon_custom_themes: {}
 # value is the theme_name from the vars above
 horizon_default_theme: "default"
 
-horizon_webroot: /
+# URI through which Horizon will be available.
+# If Skyline is not deployed defaults to `/`, `/horizon` otherwise.
+horizon_webroot: "{{ (groups['skyline_all'] | default([])) | ternary('/horizon', '/') }}"
 
 horizon_bind_address: "{{ openstack_service_bind_address | default('0.0.0.0') }}"
 
