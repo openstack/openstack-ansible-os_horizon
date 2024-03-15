@@ -48,7 +48,7 @@ Listen {{ horizon_bind_address }}:{{ horizon_listen_port }}
     RequestHeader set {{ horizon_secure_proxy_ssl_header }} "http"
 {% endif %}
 
-    WSGIScriptAlias / {{ horizon_lib_wsgi_file }}
+    WSGIScriptAlias {{ horizon_webroot }} {{ horizon_lib_wsgi_file }}
     WSGIDaemonProcess horizon user={{ horizon_system_user_name }} group={{ horizon_system_group_name }} processes={{ horizon_wsgi_processes | default(horizon_wsgi_threads) }} threads={{ horizon_wsgi_threads }} python-path={{ horizon_lib_dir | dirname }}/site-packages
 
     WSGIProcessGroup horizon
@@ -66,7 +66,7 @@ Listen {{ horizon_bind_address }}:{{ horizon_listen_port }}
       </Files>
     </Directory>
 
-    Alias /static {{ horizon_lib_dir }}/static/
+    Alias {{ horizon_webroot }}/static {{ horizon_lib_dir }}/static/
 
     <Directory {{ horizon_lib_dir }}/static/>
       Options -FollowSymlinks
