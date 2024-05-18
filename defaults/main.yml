@@ -79,10 +79,6 @@ masakari_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 mistral_dashboard_git_repo: https://opendev.org/openstack/mistral-dashboard.git
 mistral_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
-## The git source/branch for the Murano UI plugin
-murano_dashboard_git_repo: https://opendev.org/openstack/murano-dashboard
-murano_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
-
 ## The git source/branch for the Octavia UI plugin
 octavia_dashboard_git_repo: https://opendev.org/openstack/octavia-dashboard
 octavia_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
@@ -345,18 +341,12 @@ horizon_enable_manila_ui: "{{ (groups['manila_all'] is defined) and (groups['man
 ## Mistral Ui Panel
 horizon_enable_mistral_ui: "{{ (groups['mistral_all'] is defined) and (groups['mistral_all'] | length > 0) }}"
 
-## Murano UI Panel
-horizon_enable_murano_ui: "{{ (groups['murano_all'] is defined) and (groups['murano_all'] | length > 0) }}"
-
 ## Neutron features to enable
 horizon_enable_neutron_vpnaas: >-
   {{ neutron_plugin_base is defined and ('vpnaas' in neutron_plugin_base or 'ovn-vpnaas' in neutron_plugin_base) }}
 
 ## Octavia UI Panel
 horizon_enable_octavia_ui: "{{ (groups['octavia_all'] is defined) and (groups['octavia_all'] | length > 0) }}"
-
-## Sahara UI Panel
-horizon_enable_sahara_ui: "{{ (groups['sahara_all'] is defined) and (groups['sahara_all'] | length > 0) }}"
 
 ## Tacker UI Panel
 horizon_enable_tacker_ui: "{{ (groups['tacker_all'] is defined) and (groups['tacker_all'] | length > 0) }}"
@@ -474,14 +464,10 @@ horizon_masakari_optional_pip_packages:
   - "git+{{ masakari_dashboard_git_repo }}@{{ masakari_dashboard_git_install_branch }}#egg=masakari_dashboard"
 horizon_mistral_optional_pip_packages:
   - "git+{{ mistral_dashboard_git_repo }}@{{ mistral_dashboard_git_install_branch }}#egg=mistral-dashboard"
-horizon_murano_optional_pip_packages:
-  - "git+{{ murano_dashboard_git_repo }}@{{ murano_dashboard_git_install_branch }}#egg=murano-dashboard"
 horizon_neutron_vpnaas_optional_pip_packages:
   - "git+{{ neutron_vpnaas_dashboard_git_repo }}@{{ neutron_vpnaas_dashboard_git_install_branch }}#egg=neutron_vpnaas_dashboard"
 horizon_octavia_optional_pip_packages:
   - "git+{{ octavia_dashboard_git_repo }}@{{ octavia_dashboard_git_install_branch }}#egg=octavia_dashboard"
-horizon_sahara_optional_pip_packages:
-  - sahara_dashboard
 horizon_tacker_optional_pip_packages:
   - "git+{{ tacker_dashboard_git_repo }}@{{ tacker_dashboard_git_install_branch }}#egg=tacker_horizon"
 horizon_trove_optional_pip_packages:

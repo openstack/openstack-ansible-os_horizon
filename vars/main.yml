@@ -25,10 +25,6 @@ _horizon_translations_pull:
     branch: "{{ horizon_translations_project_version }}"
     enabled: True
     module: designatedashboard
-  - project: "sahara-dashboard"
-    branch: "{{ horizon_translations_project_version }}"
-    enabled: True
-    module: sahara_dashboard
   - project: "heat-dashboard"
     branch: "{{ horizon_translations_project_version }}"
     enabled: "{{ horizon_enable_heat_ui }}"
@@ -37,10 +33,6 @@ _horizon_translations_pull:
     branch: "{{ horizon_translations_project_version }}"
     enabled: True
     module: magnum_ui
-  - project: "murano-dashboard"
-    branch: "{{ horizon_translations_project_version }}"
-    enabled: True
-    module: murano_dashboard
   - project: "trove-dashboard"
     branch: "{{ horizon_translations_project_version }}"
     enabled: True
