@@ -25,3 +25,5 @@ horizon_package_list: >-
   }}
 
 _horizon_bin: "/usr/bin"
+
+horizon_lib_dir: "{{ (ansible_facts['os_family'] | lower == 'redhat') | ternary('/usr/share/openstack-dashboard', None) }}"
