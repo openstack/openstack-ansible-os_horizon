@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Define horizon_lib_dir when it's not set
-  when: horizon_lib_dir is not defined
+  when: horizon_lib_dir is not defined or (horizon_lib_dir is defined and not horizon_lib_dir)
   block:
     - name: Find the venv's python version
       command: "{{ horizon_bin }}/{{ horizon_venv_python_executable }} -c 'import horizon; print(horizon.__file__)'"

@@ -18,6 +18,9 @@ import sys
 from django.core.management import execute_from_command_line  # noqa
 
 if __name__ == "__main__":
+{% if horizon_install_method == 'distro' and (ansible_facts['os_family'] | lower == 'redhat') %}
+    sys.path.append('{{ horizon_lib_dir }}')
+{% endif %}
     os.environ.setdefault("DJANGO_SETTINGS_MODULE",
                           "openstack_dashboard.settings")
     execute_from_command_line(sys.argv)
