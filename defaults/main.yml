@@ -499,6 +499,7 @@ horizon_translations_pull: "{{ _horizon_translations_pull }}"
 
 # Set arbitrary horizon configuration options
 horizon_config_overrides: {}
+horizon_extra_local_settings: {}
 
 # Set overrides for horizon embedded policies
 # horizon_policy_overrides:
