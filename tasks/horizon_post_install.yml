@@ -144,9 +144,6 @@
   become_user: "{{ horizon_system_user_name }}"
   changed_when: false
   notify: Restart wsgi process
-  register: async_compress_static_files
-  async: 600
-  poll: 0
 
 - name: Register DB session cleanup cron
   cron:
