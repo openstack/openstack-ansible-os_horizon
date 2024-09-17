@@ -13,6 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: Ensure apache2 MPM for Debian/Ubuntu
+  apache2_module:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+    ignore_configcheck: yes
+    warn_mpm_absent: false
+  with_items: "{{ horizon_apache_mpms | sort(attribute='state') }}"
+  when:
+    - ansible_facts['pkg_mgr'] == 'apt'
+  notify: Restart wsgi process
+
+- name: Ensure apache2 MPM for EL
+  copy:
+    content: |
+      LoadModule mpm_{{ horizon_apache_mpm_backend }}_module modules/mod_mpm_{{ horizon_apache_mpm_backend }}.so
+
+    dest: /etc/httpd/conf.modules.d/00-mpm.conf
+    mode: "0644"
+  when:
+    - ansible_facts['pkg_mgr'] == 'dnf'
+  notify: Restart wsgi process
+
 # NOTE(hwoarang): Module enable/disable process is only functional on Debian
 - name: Enable apache2 modules
   apache2_module:

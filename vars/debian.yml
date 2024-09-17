@@ -53,14 +53,18 @@ horizon_apache_default_sites:
   - "/etc/apache2/sites-enabled/000-default.conf"
   - "/etc/apache2/conf-enabled/other-vhosts-access-log.conf"
 
+horizon_apache_mpms:
+  - name: "mpm_event"
+    state: "{{ (horizon_apache_mpm_backend == 'event') | ternary('present', 'absent') }}"
+  - name: "mpm_worker"
+    state: "{{ (horizon_apache_mpm_backend == 'worker') | ternary('present', 'absent') }}"
+  - name: "mpm_prefork"
+    state: "{{ (horizon_apache_mpm_backend == 'prefork') | ternary('present', 'absent') }}"
+
 horizon_apache_modules:
   - name: "wsgi"
     state: "present"
   - name: "ssl"
-    state: "present"
-  - name: "mpm_event"
-    state: "absent"
-  - name: "mpm_worker"
     state: "present"
   - name: "rewrite"
     state: "present"
