@@ -162,6 +162,7 @@ horizon_endpoint_type: internalURL
 
 horizon_server_name: "{{ ansible_facts['fqdn'] | default('horizon') }}"
 
+horizon_apache_mpm_backend: "{{ openstack_apache_mpm_backend | default('event') }}"
 horizon_apache_servertokens: "Prod"
 horizon_apache_serversignature: "Off"
 horizon_log_level: info
