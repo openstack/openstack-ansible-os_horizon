@@ -27,6 +27,8 @@ _horizon_bin: "/openstack/venvs/horizon-{{ horizon_venv_tag }}/bin"
 _dashboard_panels_location:
   - "/enabled"
   - "/conf"
-  - "/local_settings.d"
   - "/local/enabled"
+
+_dashboard_settings_location:
+  - "/local_settings.d"
   - "/local/local_settings.d"
