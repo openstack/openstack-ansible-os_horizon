@@ -65,20 +65,15 @@
       mode: "0755"
   notify: Restart wsgi process
 
-- name: Retrieve horizon policy files
-  slurp:
-    src: "{{ horizon_lib_dir }}/openstack_dashboard/conf/{{ item }}_policy.yaml"
-  with_items: "{{ horizon_policy_overrides.keys() | list }}"
-  register: _horizon_policy
-
 - name: Place policy overrides
   openstack.config_template.config_template:
-    content: "{{ item.content | b64decode }}"
-    dest: "{{ item.source }}"
+    content: "{{ item.value }}"
+    dest: "{{ horizon_lib_dir }}/openstack_dashboard/conf/{{ item.key }}_policy.yaml"
+    owner: root
+    group: "{{ horizon_system_group_name }}"
     mode: "0644"
-    config_type: json
-    config_overrides: "{{ horizon_policy_overrides[item.item] }}"
-  with_items: "{{ _horizon_policy.results }}"
+    config_type: yaml
+  with_dict: "{{ horizon_policy_overrides }}"
 
 - name: Uploading horizon custom files
   copy:
