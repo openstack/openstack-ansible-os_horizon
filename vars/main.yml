@@ -39,6 +39,7 @@ _horizon_translations_pull:
     module: trove_dashboard
 
 horizon_dashboard_panel_dir: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled"
+horizon_dashboard_settings_dir: "{{ horizon_lib_dir }}/openstack_dashboard/local/local_settings.d"
 horizon_manage: "{{ horizon_bin }}/horizon-manage.py"
 
 _horizon_uwsgi_ini_requirements:
