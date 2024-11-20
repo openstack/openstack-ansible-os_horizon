@@ -115,6 +115,10 @@ zun_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 neutron_vpnaas_dashboard_git_repo: https://opendev.org/openstack/neutron-vpnaas-dashboard
 neutron_vpnaas_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
 
+# The git source/branch for the Neutron FWaaS UI plugin
+neutron_fwaas_dashboard_git_repo: https://opendev.org/openstack/neutron-fwaas-dashboard
+neutron_fwaas_dashboard_git_install_branch: "{{ horizon_git_track_branch }}"
+
 ## The packages to build from source
 horizon_git_constraints:
   - --constraint {{ horizon_upper_constraints_url }}
@@ -346,6 +350,9 @@ horizon_enable_mistral_ui: "{{ (groups['mistral_all'] is defined) and (groups['m
 horizon_enable_neutron_vpnaas: >-
   {{ neutron_plugin_base is defined and ('vpnaas' in neutron_plugin_base or 'ovn-vpnaas' in neutron_plugin_base) }}
 
+horizon_enable_neutron_fwaas: >-
+  {{ neutron_plugin_base is defined and ('firewall_v2' in neutron_plugin_base) }}
+
 ## Octavia UI Panel
 horizon_enable_octavia_ui: "{{ (groups['octavia_all'] is defined) and (groups['octavia_all'] | length > 0) }}"
 
@@ -467,6 +474,8 @@ horizon_mistral_optional_pip_packages:
   - "git+{{ mistral_dashboard_git_repo }}@{{ mistral_dashboard_git_install_branch }}#egg=mistral-dashboard"
 horizon_neutron_vpnaas_optional_pip_packages:
   - "git+{{ neutron_vpnaas_dashboard_git_repo }}@{{ neutron_vpnaas_dashboard_git_install_branch }}#egg=neutron_vpnaas_dashboard"
+horizon_neutron_fwaas_optional_pip_packages:
+  - "git+{{ neutron_fwaas_dashboard_git_repo }}@{{ neutron_fwaas_dashboard_git_install_branch }}#egg=neutron_fwaas_dashboard"
 horizon_octavia_optional_pip_packages:
   - "git+{{ octavia_dashboard_git_repo }}@{{ octavia_dashboard_git_install_branch }}#egg=octavia_dashboard"
 horizon_tacker_optional_pip_packages:

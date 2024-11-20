@@ -49,6 +49,7 @@
          (horizon_enable_manila_ui | bool) | ternary(horizon_manila_optional_pip_packages, []) +
          (horizon_enable_masakari_ui | bool) | ternary(horizon_masakari_optional_pip_packages, []) +
          (horizon_enable_neutron_vpnaas | bool) | ternary(horizon_neutron_vpnaas_optional_pip_packages, []) +
+         (horizon_enable_neutron_fwaas | bool) | ternary(horizon_neutron_fwaas_optional_pip_packages, []) +
          (horizon_enable_octavia_ui | bool) | ternary(horizon_octavia_optional_pip_packages, []) +
          (horizon_enable_tacker_ui | bool) | ternary(horizon_tacker_optional_pip_packages, []) +
          (horizon_enable_trove_ui | bool) | ternary(horizon_trove_optional_pip_packages, []) +
