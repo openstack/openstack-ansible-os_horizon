@@ -23,6 +23,9 @@
     url: "{{ horizon_upper_constraints_url }}"
     return_content: yes
   register: _u_c_contents
+  until: _u_c_contents is success
+  retries: 15
+  delay: 3
 
 - name: Install the python venv
   include_role:
