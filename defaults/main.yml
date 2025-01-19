@@ -581,3 +581,5 @@ horizon_pki_install_certificates:
 # horizon_user_ssl_cert: <path to cert on ansible deployment host>
 # horizon_user_ssl_key: <path to cert on ansible deployment host>
 # horizon_user_ssl_ca_cert: <path to cert on ansible deployment host>
+
+horizon_sysctl_file: "{{ openstack_sysctl_file | default('/etc/sysctl.conf') }}"

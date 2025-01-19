@@ -18,6 +18,7 @@
     name: net.ipv4.ip_unprivileged_port_start
     value: "0"
     sysctl_set: yes
+    sysctl_file: "{{ horizon_sysctl_file }}"
     state: present
     reload: yes
 
