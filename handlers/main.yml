@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Compile messages
-  command: "{{ horizon_manage }} compilemessages"
+  ansible.builtin.command: "{{ horizon_manage }} compilemessages"
   become: "{{ (horizon_install_method == 'source') }}"
   become_user: "{{ horizon_system_user_name }}"
   changed_when: false
@@ -24,7 +24,7 @@
     - "venv changed"
 
 - name: Restart wsgi process
-  service:
+  ansible.builtin.service:
     name: "{{ horizon_system_service_name }}"
     enabled: true
     state: "restarted"

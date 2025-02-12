@@ -17,21 +17,21 @@
   when: horizon_lib_dir is not defined or (horizon_lib_dir is defined and not horizon_lib_dir)
   block:
     - name: Find the venv's python version
-      command: "{{ horizon_bin }}/{{ horizon_venv_python_executable }} -c 'import horizon; print(horizon.__file__)'"
+      ansible.builtin.command: "{{ horizon_bin }}/{{ horizon_venv_python_executable }} -c 'import horizon; print(horizon.__file__)'"
       changed_when: false
       register: _horizon_python_venv_details
 
     - name: Set python lib dir fact
-      set_fact:
+      ansible.builtin.set_fact:
         horizon_lib_dir: "{{ _horizon_python_venv_details.stdout | dirname | dirname }}"
 
 - name: Configure source-installed dashboards
-  include_tasks: horizon_post_install_source.yml
+  ansible.builtin.include_tasks: horizon_post_install_source.yml
   when: horizon_install_method == 'source'
 
 # NOTE(noonedeadpunk): change of ownership is required for collectstatic and compilemessages
 - name: Ensure horizon dirs are accessible by user
-  file:
+  ansible.builtin.file:
     path: "{{ item.path }}"
     state: directory
     owner: "{{ horizon_system_user_name }}"
@@ -46,7 +46,7 @@
 # TODO(hwoarang): See if we can use local_settings.py from the distribution packages
 # when horizon_install_method == 'distro'
 - name: Setup Horizon config(s)
-  template:
+  ansible.builtin.template:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ item.owner | default(horizon_system_user_name) }}"
@@ -76,14 +76,14 @@
   with_dict: "{{ horizon_policy_overrides }}"
 
 - name: Uploading horizon custom files
-  copy:
+  ansible.builtin.copy:
     src: "{{ item.value.src }}"
     dest: "{{ horizon_lib_dir }}/openstack_dashboard/static/dashboard/{{ item.value.dest }}"
     mode: "0644"
   with_dict: "{{ horizon_custom_uploads | default({}) }}"
 
 - name: Create horizon links
-  file:
+  ansible.builtin.file:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     owner: "{{ horizon_system_user_name }}"
@@ -94,7 +94,7 @@
     - { src: "/etc/horizon/local_settings.py", dest: "{{ horizon_lib_dir }}/openstack_dashboard/local/local_settings.py" }
 
 - name: Create customization module directory
-  file:
+  ansible.builtin.file:
     path: "{{ horizon_lib_dir }}/horizon_customization"
     state: directory
     owner: "{{ horizon_system_user_name }}"
@@ -103,7 +103,7 @@
   when: horizon_customization_module is defined
 
 - name: Drop horizon customization module
-  template:
+  ansible.builtin.template:
     src: "{{ horizon_customization_module }}"
     dest: "{{ horizon_lib_dir }}/horizon_customization/__init__.py"
     owner: "{{ horizon_system_user_name }}"
@@ -113,7 +113,7 @@
   when: horizon_customization_module is defined
 
 - name: Creating horizon custom theme path
-  file:
+  ansible.builtin.file:
     path: "{{ horizon_lib_dir }}/openstack_dashboard/{{ item.value.theme_path }}/"
     state: directory
     owner: "{{ horizon_system_user_name }}"
@@ -122,7 +122,7 @@
   with_dict: "{{ horizon_custom_themes }}"
 
 - name: Drop horizon custom themes
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ item.value.theme_src_archive }}"
     dest: "{{ horizon_lib_dir }}/openstack_dashboard/{{ item.value.theme_path }}/"
     owner: "{{ horizon_system_user_name }}"
@@ -132,21 +132,21 @@
   notify: Restart wsgi process
 
 - name: Collect static files
-  command: "{{ horizon_manage }} collectstatic --noinput"
+  ansible.builtin.command: "{{ horizon_manage }} collectstatic --noinput"
   become: true
   become_user: "{{ horizon_system_user_name }}"
   changed_when: false
   notify: Restart wsgi process
 
 - name: Compress static files
-  command: "{{ horizon_manage }} compress --force"
+  ansible.builtin.command: "{{ horizon_manage }} compress --force"
   become: true
   become_user: "{{ horizon_system_user_name }}"
   changed_when: false
   notify: Restart wsgi process
 
 - name: Register DB session cleanup cron
-  cron:
+  ansible.builtin.cron:
     name: "Clear out expired sessions"
     minute: "{{ 58 | random(seed=inventory_hostname, start=2) }}"
     hour: "21"

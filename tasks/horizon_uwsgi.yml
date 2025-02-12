@@ -23,7 +23,7 @@
     reload: true
 
 - name: Import uwsgi role
-  include_role:
+  ansible.builtin.include_role:
     name: uwsgi
   vars:
     uwsgi_services: "{{ uwsgi_horizon_services }}"

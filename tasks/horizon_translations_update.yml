@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Perform a Zanata Pull Catalog
-  command: >-
+  ansible.builtin.command: >-
     {{ horizon_manage }} pull_catalog -p {{ translation.project }} -m {{ translation.module }} -b {{
       (translation.branch | default('master')) | replace('/', '-')
     }}
