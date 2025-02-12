@@ -16,14 +16,14 @@
 _horizon_translations_pull:
   - project: "horizon"
     branch: "{{ horizon_translations_project_version }}"
-    enabled: True
+    enabled: true
     module:
       - horizon
       - openstack_auth
       - openstack_dashboard
   - project: "designate-dashboard"
     branch: "{{ horizon_translations_project_version }}"
-    enabled: True
+    enabled: true
     module: designatedashboard
   - project: "heat-dashboard"
     branch: "{{ horizon_translations_project_version }}"
@@ -31,11 +31,11 @@ _horizon_translations_pull:
     module: heat_dashboard
   - project: "magnum-ui"
     branch: "{{ horizon_translations_project_version }}"
-    enabled: True
+    enabled: true
     module: magnum_ui
   - project: "trove-dashboard"
     branch: "{{ horizon_translations_project_version }}"
-    enabled: True
+    enabled: true
     module: trove_dashboard
 
 horizon_dashboard_panel_dir: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled"

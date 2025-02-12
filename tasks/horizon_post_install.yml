@@ -39,7 +39,7 @@
     mode: "{{ item.mode | default(omit) }}"
     recurse: "{{ item.recurse | default(True) }}"
   with_items:
-    - { path: "{{ horizon_lib_dir }}", fixup: True }
+    - { path: "{{ horizon_lib_dir }}", fixup: true }
     - { path: "/etc/openstack-dashboard", fixup: "{{ (ansible_facts['os_family'] | lower) == 'redhat' }}" }
   when: item.fixup
 
@@ -89,7 +89,7 @@
     owner: "{{ horizon_system_user_name }}"
     group: "{{ horizon_system_group_name }}"
     state: "link"
-    force: yes
+    force: true
   with_items:
     - { src: "/etc/horizon/local_settings.py", dest: "{{ horizon_lib_dir }}/openstack_dashboard/local/local_settings.py" }
 
@@ -133,14 +133,14 @@
 
 - name: Collect static files
   command: "{{ horizon_manage }} collectstatic --noinput"
-  become: yes
+  become: true
   become_user: "{{ horizon_system_user_name }}"
   changed_when: false
   notify: Restart wsgi process
 
 - name: Compress static files
   command: "{{ horizon_manage }} compress --force"
-  become: yes
+  become: true
   become_user: "{{ horizon_system_user_name }}"
   changed_when: false
   notify: Restart wsgi process
