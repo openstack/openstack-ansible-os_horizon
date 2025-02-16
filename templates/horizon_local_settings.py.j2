@@ -501,7 +501,6 @@ POLICY_FILES_PATH = '/etc/openstack-dashboard'
 #    'image': 'glance_policy.json',
 #    'orchestration': 'heat_policy.json',
 #    'network': 'neutron_policy.json',
-#    'telemetry': 'ceilometer_policy.json',
 #}
 
 # Trove user and database extension support. By default support for
@@ -576,11 +575,6 @@ LOGGING = {
             'propagate': False,
         },
         'heatclient': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'ceilometerclient': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False,
