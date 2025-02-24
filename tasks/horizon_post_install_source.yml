@@ -31,9 +31,9 @@
     paths: "{{ horizon_lib_dir }}"
     patterns: "^.*(dashboard|ui)$"
     file_type: directory
-    use_regex: yes
+    use_regex: true
     excludes: "openstack_dashboard"
-    recurse: no
+    recurse: false
   register: found_dashboards
 
 - name: Registering panels
@@ -48,7 +48,7 @@
       {{ dashboard_path }}
     patterns: ["^_[0-9]{2,4}_.*.py$"]
     file_type: file
-    use_regex: yes
+    use_regex: true
   register: found_panels
 
 - name: Registering settings
@@ -63,7 +63,7 @@
       {{ dashboard_path }}
     patterns: ["^_[0-9]{2,4}_.*.py$"]
     file_type: file
-    use_regex: yes
+    use_regex: true
   register: found_settings
 
 - name: Registering default policy files
@@ -76,9 +76,9 @@
       {%   endfor %}
       {% endfor %}
       {{ policy_path }}
-    patterns: ['^.*\.(json|yaml)$']
+    patterns: ["^.*\\.(json|yaml)$"]
     file_type: file
-    use_regex: yes
+    use_regex: true
   register: found_default_policy
 
 - name: Registering policy files
@@ -93,7 +93,7 @@
       {{ policy_path }}
     patterns: ["^.*_policy.(json|yaml)$"]
     file_type: file
-    use_regex: yes
+    use_regex: true
   register: found_policy
 
 - name: Link default policy files

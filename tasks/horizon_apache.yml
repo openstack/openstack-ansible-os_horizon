@@ -17,7 +17,7 @@
   apache2_module:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-    ignore_configcheck: yes
+    ignore_configcheck: true
     warn_mpm_absent: false
   with_items: "{{ horizon_apache_mpms | sort(attribute='state') }}"
   when:
@@ -40,7 +40,7 @@
   apache2_module:
     name: "{{ item.name }}"
     state: "{{ item.state }}"
-    ignore_configcheck: yes
+    ignore_configcheck: true
   with_items:
     - "{{ horizon_apache_modules }}"
   when:
@@ -83,14 +83,14 @@
 - name: Ensure Apache ServerTokens
   lineinfile:
     dest: "{{ horizon_apache_security_conf }}"
-    regexp: '^ServerTokens'
+    regexp: "^ServerTokens"
     line: "ServerTokens {{ horizon_apache_servertokens }}"
   notify: Restart wsgi process
 
 - name: Ensure Apache ServerSignature
   lineinfile:
     dest: "{{ horizon_apache_security_conf }}"
-    regexp: '^ServerSignature'
+    regexp: "^ServerSignature"
     line: "ServerSignature {{ horizon_apache_serversignature }}"
   notify: Restart wsgi process
 
@@ -99,7 +99,7 @@
 - name: Remove Listen from Apache config
   lineinfile:
     dest: "{{ horizon_apache_security_conf }}"
-    regexp: '^(Listen.*)'
-    backrefs: yes
-    line: '#\1'
+    regexp: "^(Listen.*)"
+    backrefs: true
+    line: "#\\1"
   notify: Restart wsgi process

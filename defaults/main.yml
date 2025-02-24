@@ -14,7 +14,7 @@
 # limitations under the License.
 
 ## Verbosity Options
-debug: False
+debug: false
 
 # Set the host which will execute the shade modules
 # for the service setup. The host must already have
@@ -143,10 +143,10 @@ horizon_service_name: horizon
 ## Session configuration
 # Specifies the timespan in seconds inactivity, until a user is considered as
 # logged out
-horizon_session_engine: 'django.contrib.sessions.backends.cache'
+horizon_session_engine: "django.contrib.sessions.backends.cache"
 horizon_session_caches:
   default:
-    BACKEND: 'django.core.cache.backends.memcached.PyMemcacheCache'
+    BACKEND: "django.core.cache.backends.memcached.PyMemcacheCache"
     LOCATION: "{{ horizon_memcached_servers.split(',') }}"
 horizon_session_timeout: 1800
 
@@ -155,7 +155,7 @@ horizon_help_url: https://docs.openstack.org/horizon/latest/user/
 
 ## Horizon ALLOWED_HOSTS
 horizon_allowed_hosts:
-  - '*'
+  - "*"
 
 ## Installation directories
 # When horizon_lib_dir is not defined, it will be detected automatically
@@ -183,31 +183,30 @@ horizon_overview_days_range: 1
 # require any extra configuration
 horizon_images_upload_mode: direct
 
-horizon_images_allow_location: False
+horizon_images_allow_location: false
 horizon_time_zone: UTC
-horizon_enforce_password_check: False
-horizon_disable_password_reveal: False
-horizon_enable_password_retrieve: False
-horizon_enable_password_autocomplete: False
-horizon_enable_heatstack_user_pass: True
+horizon_enforce_password_check: false
+horizon_disable_password_reveal: false
+horizon_enable_password_retrieve: false
+horizon_enable_password_autocomplete: false
+horizon_enable_heatstack_user_pass: true
 # If nova_libvirt_inject_password is set to True, then this can also be enabled:
-horizon_can_set_password: False
-horizon_enable_cinder_backup: False
+horizon_can_set_password: false
+horizon_enable_cinder_backup: false
 # Enables IPv6 support in Horizon, such as managing network subnets
-horizon_enable_ipv6: True
+horizon_enable_ipv6: true
 # Enables router support in Horizon, disable if you don't have Neutron L3 agent
-horizon_enable_router: True
+horizon_enable_router: true
 
 # Disable/Enable simplified floating IP address management for deployments with
 # multiple floating IP pools or complex network requirements.
-horizon_simple_ip_management: True
+horizon_simple_ip_management: true
 
 # To enable ha router support in horizon set to True
-horizon_enable_ha_router: False
+horizon_enable_ha_router: false
 
 # Provide default DNS servers to use when a subnet is created.
 horizon_default_dns_nameservers: []
-
 # Provide list of network types that are available for creation
 horizon_network_provider_types: "{{ neutron_ml2_drivers_type | default('geneve,vlan,flat') }}"
 
@@ -217,7 +216,7 @@ horizon_network_provider_types: "{{ neutron_ml2_drivers_type | default('geneve,v
 # where iframes are not used in deployment. Default setting is True.
 # For more information see:
 # http://tinyurl.com/anticlickjack
-horizon_disallow_iframe_embed: True
+horizon_disallow_iframe_embed: true
 
 # WSGI tuning parameters
 # horizon_wsgi_processes: 4
@@ -269,10 +268,10 @@ horizon_keystone_endpoint: "{{ keystone_service_internalurl }}"
 
 ## Horizon Multi-Domain Support
 # these variables should only be changed if horizon_keystone_endpoint is a Keystone v3 API endpoint
-horizon_keystone_multidomain_support: False
+horizon_keystone_multidomain_support: false
 # It is strongly advised NOT to enable dropdown for public clouds, as advertising enabled domains
 # to unauthenticated customers irresponsibly exposes private information.
-horizon_keystone_multidomain_dropdown: False
+horizon_keystone_multidomain_dropdown: false
 
 horizon_keystone_default_domain: Default
 
@@ -282,7 +281,7 @@ horizon_keystone_default_domain: Default
 horizon_keystone_multidomain_choices: "(('{{ horizon_keystone_default_domain }}', '{{ horizon_keystone_default_domain }}'),)"
 
 # Enable/disable v2 openrc file download in horizon.
-horizon_show_keystone_v2_rc: True
+horizon_show_keystone_v2_rc: true
 
 ### Set the cacert pem for Keystone if you'd like Horizon to verify it.
 # horizon_cacert_pem: /path/to/cacert.pem
@@ -300,24 +299,24 @@ horizon_ssl_csrf_trusted_origins: []
 horizon_default_role_name: member
 
 ## Launch instance
-horizon_launch_instance_legacy: False
-horizon_launch_instance_ng: True
+horizon_launch_instance_legacy: false
+horizon_launch_instance_ng: true
 horizon_launch_instance_defaults:
-  config_drive: False
-  enable_scheduler_hints: True
-  disable_image: False
-  disable_instance_snapshot: False
-  disable_volume: False
-  disable_volume_snapshot: False
-  create_volume: True
-  hide_create_volume: False
+  config_drive: false
+  enable_scheduler_hints: true
+  disable_image: false
+  disable_instance_snapshot: false
+  disable_volume: false
+  disable_volume_snapshot: false
+  create_volume: true
+  hide_create_volume: false
 
 ## Adjutant UI Panel
 horizon_enable_adjutant_ui: "{{ (groups['adjutant_all'] is defined) and (groups['adjutant_all'] | length > 0) }}"
 
 ## Barbican UI Panel
 ### Barbican UI is just a cookie-cutter scaffolding and does not provide any functionality at this time.
-horizon_enable_barbican_ui: False
+horizon_enable_barbican_ui: false
 
 ## Blazar UI Panel
 horizon_enable_blazar_ui: "{{ (groups['blazar_all'] is defined) and (groups['blazar_all'] | length > 0) }}"
@@ -363,7 +362,7 @@ horizon_enable_tacker_ui: "{{ (groups['tacker_all'] is defined) and (groups['tac
 horizon_enable_trove_ui: "{{ (groups['trove_all'] is defined) and (groups['trove_all'] | length > 0) }}"
 
 ## Watcher UI Panel
-horizon_enable_watcher_ui: False
+horizon_enable_watcher_ui: false
 
 ## Zun UI Panel
 horizon_enable_zun_ui: "{{ (groups['zun_all'] is defined) and (groups['zun_all'] | length > 0) }}"
@@ -437,7 +436,7 @@ horizon_listen_ports:
 
 horizon_pip_packages:
   - "git+{{ horizon_git_repo }}@{{ horizon_git_install_branch }}#egg=horizon"
-  - "git+{{ openstack_github_base_url }}/Kronuz/pyScss@60414f5d573315a8458b5fbcdf69e5c648c44a9a"  # needed for python>=3.11
+  - "git+{{ openstack_github_base_url }}/Kronuz/pyScss@60414f5d573315a8458b5fbcdf69e5c648c44a9a" # needed for python>=3.11
   - pymemcache
   - python-memcached
 
@@ -495,7 +494,7 @@ horizon_optional_pip_packages: []
 # This variable is used to update the horizon translations from
 # Zanata, this can be set to "True" when testing translations,
 # but should otherwise be left as False.
-horizon_translations_update: False
+horizon_translations_update: false
 
 # This variable is used to define the version of the project
 # (horizon) to pull from Zanata. Default value is master,
@@ -528,10 +527,10 @@ horizon_keystone_admin_roles:
 # federation protocols and identity provider/federation protocol
 # horizon_websso_keystone_url: "{{ horizon_keystone_endpoint }}"
 horizon_websso_initial_choice: "credentials"
-horizon_websso_default_redirect: False
+horizon_websso_default_redirect: false
 horizon_websso_default_redirect_region: "{{ horizon_websso_keystone_url | default(horizon_keystone_endpoint) }}"
 horizon_websso_default_redirect_logout: ""
-horizon_websso_use_http_referer: True
+horizon_websso_use_http_referer: true
 
 ###
 ### Backend TLS
@@ -549,7 +548,7 @@ horizon_pki_certs_path: "{{ horizon_pki_dir ~ '/certs/certs/' }}"
 horizon_pki_intermediate_cert_name: "{{ openstack_pki_service_intermediate_cert_name | default('ExampleCorpIntermediate') }}"
 horizon_pki_intermediate_cert_path: >-
   {{ horizon_pki_dir ~ '/roots/' ~ horizon_pki_intermediate_cert_name ~ '/certs/' ~ horizon_pki_intermediate_cert_name ~ '.crt' }}
-horizon_pki_regen_cert: ''
+horizon_pki_regen_cert: ""
 horizon_pki_san: "{{ openstack_pki_san | default('DNS:' ~ ansible_facts['hostname'] ~ ',IP:' ~ management_address) }}"
 horizon_pki_certificates:
   - name: "horizon_{{ ansible_facts['hostname'] }}"

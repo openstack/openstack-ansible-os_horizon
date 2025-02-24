@@ -17,10 +17,10 @@
   ansible.posix.sysctl:
     name: net.ipv4.ip_unprivileged_port_start
     value: "0"
-    sysctl_set: yes
+    sysctl_set: true
     sysctl_file: "{{ horizon_sysctl_file }}"
     state: present
-    reload: yes
+    reload: true
 
 - name: Import uwsgi role
   include_role:

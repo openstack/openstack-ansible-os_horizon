@@ -26,7 +26,7 @@
 - name: Restart wsgi process
   service:
     name: "{{ horizon_system_service_name }}"
-    enabled: yes
+    enabled: true
     state: "restarted"
     daemon_reload: "{{ (ansible_facts['service_mgr'] == 'systemd') | ternary('yes', omit) }}"
   listen:
