@@ -19,7 +19,7 @@
 # constraints are given which will always happen with a source install
 # and wheels built on the repo server. We must filter horizon out of u-c.
 - name: Retrieve the constraints URL
-  uri:
+  ansible.builtin.uri:
     url: "{{ horizon_upper_constraints_url }}"
     return_content: true
   register: _u_c_contents
@@ -28,7 +28,7 @@
   delay: 3
 
 - name: Install the python venv
-  include_role:
+  ansible.builtin.include_role:
     name: "python_venv_build"
   vars:
     venv_python_executable: "{{ horizon_venv_python_executable }}"

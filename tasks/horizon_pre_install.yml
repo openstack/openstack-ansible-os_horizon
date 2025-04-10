@@ -14,13 +14,13 @@
 # limitations under the License.
 
 - name: Create the system group
-  group:
+  ansible.builtin.group:
     name: "{{ horizon_system_group_name }}"
     state: "present"
     system: "yes"
 
 - name: Create the horizon system user
-  user:
+  ansible.builtin.user:
     name: "{{ horizon_system_user_name }}"
     group: "{{ horizon_system_group_name }}"
     comment: "{{ horizon_system_comment }}"
@@ -30,7 +30,7 @@
     home: "{{ horizon_system_user_home }}"
 
 - name: Create horizon dir
-  file:
+  ansible.builtin.file:
     path: "{{ item.path }}"
     state: "directory"
     owner: "{{ item.owner | default(horizon_system_user_name) }}"
@@ -45,7 +45,7 @@
     - { path: "/etc/pki/tls/private", owner: "root", group: "root", condition: "{{ (ansible_facts['pkg_mgr'] == 'dnf') }}" }
 
 - name: Create system links
-  file:
+  ansible.builtin.file:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     state: "link"

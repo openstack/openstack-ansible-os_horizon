@@ -14,7 +14,7 @@
 # limitations under the License.
 
 - name: Create static horizon dir
-  file:
+  ansible.builtin.file:
     path: "{{ item.path }}"
     state: "directory"
     owner: "{{ item.owner | default(horizon_system_user_name) }}"
@@ -27,7 +27,7 @@
     - { path: "{{ horizon_lib_dir }}/openstack_dashboard/local/enabled", mode: "2755" }
 
 - name: Registering dashboards
-  find:
+  ansible.builtin.find:
     paths: "{{ horizon_lib_dir }}"
     patterns: "^.*(dashboard|ui)$"
     file_type: directory
@@ -37,7 +37,7 @@
   register: found_dashboards
 
 - name: Registering panels
-  find:
+  ansible.builtin.find:
     paths: |-
       {% set dashboard_path = [] %}
       {% for dashboard in found_dashboards.files %}
@@ -52,7 +52,7 @@
   register: found_panels
 
 - name: Registering settings
-  find:
+  ansible.builtin.find:
     paths: |-
       {% set dashboard_path = [] %}
       {% for dashboard in found_dashboards.files %}
@@ -67,7 +67,7 @@
   register: found_settings
 
 - name: Registering default policy files
-  find:
+  ansible.builtin.find:
     paths: |-
       {% set policy_path = [] %}
       {% for dashboard in found_dashboards.files %}
@@ -82,7 +82,7 @@
   register: found_default_policy
 
 - name: Registering policy files
-  find:
+  ansible.builtin.find:
     paths: |-
       {% set policy_path = [] %}
       {% for dashboard in found_dashboards.files %}
@@ -97,7 +97,7 @@
   register: found_policy
 
 - name: Link default policy files
-  file:
+  ansible.builtin.file:
     src: "{{ item.path }}"
     dest: "{{ horizon_lib_dir }}/openstack_dashboard/conf/default_policies/{{ item.path | basename }}"
     state: link
@@ -106,7 +106,7 @@
     - Compile messages
 
 - name: Link policy files
-  file:
+  ansible.builtin.file:
     src: "{{ item.path }}"
     dest: "{{ horizon_lib_dir }}/openstack_dashboard/conf/{{ item.path | basename }}"
     state: link
@@ -115,7 +115,7 @@
     - Compile messages
 
 - name: Enable project settings
-  file:
+  ansible.builtin.file:
     src: "{{ item.path }}"
     path: "{{ horizon_dashboard_settings_dir }}/{{ item.path | basename }}"
     state: link
@@ -125,7 +125,7 @@
     - Restart wsgi process
 
 - name: Enable project panels
-  file:
+  ansible.builtin.file:
     src: "{{ item.path }}"
     path: "{{ horizon_dashboard_panel_dir }}/{{ item.path | basename }}"
     state: link
