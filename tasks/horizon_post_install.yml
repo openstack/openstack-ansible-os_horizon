@@ -55,7 +55,6 @@
   with_items:
     - src: "horizon_local_settings.py.j2"
       dest: "/etc/horizon/local_settings.py"
-      owner: "root"
       mode: "0640"
     - src: "horizon-manage.py.j2"
       dest: "{{ horizon_bin }}/horizon-manage.py"
