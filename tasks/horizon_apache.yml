@@ -13,93 +13,60 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: Ensure apache2 MPM for Debian/Ubuntu
-  community.general.apache2_module:
-    name: "{{ item.name }}"
-    state: "{{ item.state }}"
-    ignore_configcheck: true
-    warn_mpm_absent: false
-  with_items: "{{ horizon_apache_mpms | sort(attribute='state') }}"
-  when:
-    - ansible_facts['pkg_mgr'] == 'apt'
-  notify: Restart wsgi process
-
-- name: Ensure apache2 MPM for EL
-  ansible.builtin.copy:
-    content: |
-      LoadModule mpm_{{ horizon_apache_mpm_backend }}_module modules/mod_mpm_{{ horizon_apache_mpm_backend }}.so
-
-    dest: /etc/httpd/conf.modules.d/00-mpm.conf
-    mode: "0644"
-  when:
-    - ansible_facts['pkg_mgr'] == 'dnf'
-  notify: Restart wsgi process
-
-# NOTE(hwoarang): Module enable/disable process is only functional on Debian
-- name: Enable apache2 modules
-  community.general.apache2_module:
-    name: "{{ item.name }}"
-    state: "{{ item.state }}"
-    ignore_configcheck: true
-  with_items:
-    - "{{ horizon_apache_modules }}"
-  when:
-    - ansible_facts['pkg_mgr'] == 'apt'
-  notify: Restart wsgi process
-
-- name: Drop apache2 configs
-  ansible.builtin.template:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: "{{ item.owner | default(horizon_system_user_name) }}"
-    group: "{{ item.group | default(horizon_system_group_name) }}"
-    mode: "0644"
-  with_items: "{{ horizon_apache_configs }}"
-  notify: Restart wsgi process
-
-- name: Disable default apache site
+- name: Clean-up old vhost files
   ansible.builtin.file:
     path: "{{ item }}"
-    state: "absent"
-  with_items: "{{ horizon_apache_default_sites }}"
-  notify: Restart wsgi process
+    state: absent
+  loop: "{{ horizon_deprecated_apache_configs }}"
 
-- name: Enable Horizon Site
-  ansible.builtin.file:
-    src: "{{ horizon_apache_site_available }}"
-    dest: "{{ horizon_apache_site_enabled }}"
-    state: "link"
-  when:
-    - horizon_apache_site_available is defined
-    - horizon_apache_site_enabled is defined
-  notify: Restart wsgi process
-
-- name: Ensure Apache ServerName
-  ansible.builtin.lineinfile:
-    dest: "{{ horizon_apache_conf }}"
-    line: "ServerName {{ horizon_server_name }}"
-  notify: Restart wsgi process
-
-- name: Ensure Apache ServerTokens
-  ansible.builtin.lineinfile:
-    dest: "{{ horizon_apache_security_conf }}"
-    regexp: "^ServerTokens"
-    line: "ServerTokens {{ horizon_apache_servertokens }}"
-  notify: Restart wsgi process
-
-- name: Ensure Apache ServerSignature
-  ansible.builtin.lineinfile:
-    dest: "{{ horizon_apache_security_conf }}"
-    regexp: "^ServerSignature"
-    line: "ServerSignature {{ horizon_apache_serversignature }}"
-  notify: Restart wsgi process
-
-# Removing the Listen (or listen.conf inclusion) from apache config to prevent
-# conflicts with ports.conf on CentOS and openSUSE
-- name: Remove Listen from Apache config
-  ansible.builtin.lineinfile:
-    dest: "{{ horizon_apache_security_conf }}"
-    regexp: "^(Listen.*)"
-    backrefs: true
-    line: "#\\1"
-  notify: Restart wsgi process
+- name: Including HTTPD role
+  ansible.builtin.import_role:
+    name: httpd
+  vars:
+    httpd_pki_dir: "{{ horizon_pki_dir }}"
+    httpd_pki_setup_host: "{{ horizon_pki_setup_host }}"
+    httpd_ssl_protocol: "{{ horizon_ssl_protocol }}"
+    httpd_ssl_cipher_suite_tls12: "{{ horizon_ssl_cipher_suite_tls12 }}"
+    httpd_ssl_cipher_suite_tls13: "{{ horizon_ssl_cipher_suite_tls13 }}"
+    httpd_pki_regen_cert: "{{ horizon_pki_regen_cert }}"
+    httpd_extra_packages: "{{ horizon_apache_distro_packages }}"
+    httpd_extra_modules:
+      - name: "wsgi"
+        state: "present"
+    httpd_vhosts:
+      - name: openstack_dashboard
+        address: "{{ horizon_bind_address }}"
+        port: "{{ (horizon_backend_ssl | bool) | ternary(horizon_listen_ports.https, horizon_listen_ports.http) }}"
+        log_level: "{{ horizon_log_level }}"
+        log_format: "{{ horizon_apache_custom_log_format }}"
+        server_name: "{{ horizon_server_name }}"
+        headers:
+          - 'RequestHeader set {{ horizon_secure_proxy_ssl_header }} "{{ horizon_external_ssl | ternary("https", "http") }}"'
+        options:
+          - "WSGIScriptAlias {{ horizon_webroot }} {{ horizon_lib_wsgi_file }}"
+          - >-
+            WSGIDaemonProcess horizon user={{ horizon_system_user_name }} group={{ horizon_system_group_name }} processes={{ horizon_wsgi_processes | default(
+              horizon_wsgi_threads) }} threads={{ horizon_wsgi_threads }} python-path={{ horizon_lib_dir | dirname }}/site-packages
+          - "WSGIProcessGroup horizon"
+          - "WSGIApplicationGroup %{GLOBAL}"
+          - "Alias {{ horizon_webroot }}/static {{ horizon_lib_dir }}/static/"
+        directories:
+          - path: "{{ horizon_lib_wsgi_file | dirname }}"
+            options:
+              - "<Files {{ horizon_lib_wsgi_file | basename }} >"
+              - "  Require all granted"
+              - "</Files>"
+          - path: "{{ horizon_lib_dir }}/static/"
+            options:
+              - Options -FollowSymlinks
+              - Require all granted
+              - AddOutputFilterByType DEFLATE application/json
+              - AddOutputFilterByType DEFLATE text/javascript
+              - AddOutputFilterByType DEFLATE text/plain
+              - AddOutputFilterByType DEFLATE text/xml
+              - AddOutputFilterByType DEFLATE text/html
+        ssl: "{{ horizon_backend_ssl | ternary(_horizon_httpd_vhost_ssl, false) }}"
+  tags:
+    - horizon-install
+    - horizon-config
+    - httpd

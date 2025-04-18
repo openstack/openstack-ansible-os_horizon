@@ -53,26 +53,6 @@
   tags:
     - horizon-install
 
-- name: Create and install SSL certificates
-  ansible.builtin.include_role:
-    name: pki
-    tasks_from: main_certs.yml
-    apply:
-      tags:
-        - horizon-config
-        - pki
-  vars:
-    pki_setup_host: "{{ horizon_pki_setup_host }}"
-    pki_dir: "{{ horizon_pki_dir }}"
-    pki_create_certificates: "{{ horizon_user_ssl_cert is not defined and horizon_user_ssl_key is not defined }}"
-    pki_regen_cert: "{{ horizon_pki_regen_cert }}"
-    pki_certificates: "{{ horizon_pki_certificates }}"
-    pki_install_certificates: "{{ horizon_pki_install_certificates }}"
-  when:
-    - horizon_backend_ssl
-  tags:
-    - always
-
 - name: Importing horizon_post_install tasks
   ansible.builtin.import_tasks: horizon_post_install.yml
   tags:

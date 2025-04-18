@@ -42,6 +42,18 @@ horizon_dashboard_panel_dir: "{{ horizon_lib_dir }}/openstack_dashboard/local/en
 horizon_dashboard_settings_dir: "{{ horizon_lib_dir }}/openstack_dashboard/local/local_settings.d"
 horizon_manage: "{{ horizon_bin }}/horizon-manage.py"
 
+_horizon_httpd_vhost_ssl: |-
+  {% set ssl_options = {} %}
+  {% if (horizon_user_ssl_cert is defined and horizon_user_ssl_cert) and (horizon_user_ssl_key is defined and horizon_user_ssl_key) %}
+  {%   set _ = ssl_options.update({'cert': horizon_user_ssl_cert, 'key': horizon_user_ssl_key}) %}
+  {%   if horizon_user_ssl_ca_cert is defined and horizon_user_ssl_ca_cert %}
+  {%     set _ = ssl_options.update({'ca': horizon_user_ssl_ca_cert}) %}
+  {%   endif %}
+  {% else %}
+  {%   set _ = ssl_options.update({'san': horizon_pki_san}) %}
+  {% endif %}
+  {{ ssl_options }}
+
 _horizon_uwsgi_ini_requirements:
   uwsgi:
     static-map: "/static={{ horizon_lib_dir }}/static/"
