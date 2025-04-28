@@ -79,14 +79,6 @@
     - horizon-config
     - post-install
 
-- name: Importing horizon_service_setup tasks
-  ansible.builtin.import_tasks: horizon_service_setup.yml
-  when:
-    - ('horizon_all' in group_names)
-    - inventory_hostname == groups['horizon_all'][0]
-  tags:
-    - horizon-config
-
 - name: Importing uwsgi/apache tasks
   ansible.builtin.import_tasks: "{{ (horizon_use_uwsgi | bool) | ternary('horizon_uwsgi.yml', 'horizon_apache.yml') }}"
   tags:
