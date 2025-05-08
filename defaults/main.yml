@@ -538,11 +538,11 @@ horizon_pki_setup_host: "{{ openstack_pki_setup_host | default('localhost') }}"
 
 # horizon server certificate
 horizon_pki_regen_cert: ""
-horizon_pki_san: "{{ openstack_pki_san | default('DNS:' ~ ansible_facts['hostname'] ~ ',IP:' ~ management_address) }}"
+horizon_pki_san: "{{ openstack_pki_san | default({'dns': [ansible_facts['hostname']], 'ip': [management_address]}) }}"
 
 # Define user-provided SSL certificates
-# horizon_user_ssl_cert: <path to cert on ansible deployment host>
-# horizon_user_ssl_key: <path to cert on ansible deployment host>
-# horizon_user_ssl_ca_cert: <path to cert on ansible deployment host>
+horizon_user_ssl_cert: ""
+horizon_user_ssl_key: ""
+horizon_user_ssl_ca_cert: ""
 
 horizon_sysctl_file: "{{ openstack_sysctl_file | default('/etc/sysctl.conf') }}"
