@@ -166,9 +166,6 @@ horizon_endpoint_type: internalURL
 
 horizon_server_name: "{{ ansible_facts['fqdn'] | default('horizon') }}"
 
-horizon_apache_mpm_backend: "{{ openstack_apache_mpm_backend | default('event') }}"
-horizon_apache_servertokens: "Prod"
-horizon_apache_serversignature: "Off"
 horizon_log_level: info
 # It's combined log format without datetime, since it's already present in journald
 horizon_apache_custom_log_format: '"%h %l %u \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\""'
@@ -227,9 +224,6 @@ horizon_wsgi_threads_max: 16
 horizon_wsgi_threads: "{{ [[ansible_facts['processor_vcpus'] | default(2) // 2, 1] | max, horizon_wsgi_threads_max] | min }}"
 
 ## Horizon SSL
-horizon_ssl_cert: /etc/ssl/certs/horizon.pem
-horizon_ssl_key: /etc/ssl/private/horizon.key
-horizon_ssl_ca_cert: /etc/ssl/certs/horizon-ca.pem
 horizon_ssl_protocol: "{{ ssl_protocol | default('ALL -SSLv2 -SSLv3 -TLSv1 -TLSv1.1') }}"
 # TLS v1.2 and below
 horizon_ssl_cipher_suite_tls12: >-
@@ -543,38 +537,8 @@ horizon_pki_dir: "{{ openstack_pki_dir | default('/etc/openstack_deploy/pki') }}
 horizon_pki_setup_host: "{{ openstack_pki_setup_host | default('localhost') }}"
 
 # horizon server certificate
-horizon_pki_keys_path: "{{ horizon_pki_dir ~ '/certs/private/' }}"
-horizon_pki_certs_path: "{{ horizon_pki_dir ~ '/certs/certs/' }}"
-horizon_pki_intermediate_cert_name: "{{ openstack_pki_service_intermediate_cert_name | default('ExampleCorpIntermediate') }}"
-horizon_pki_intermediate_cert_path: >-
-  {{ horizon_pki_dir ~ '/roots/' ~ horizon_pki_intermediate_cert_name ~ '/certs/' ~ horizon_pki_intermediate_cert_name ~ '.crt' }}
 horizon_pki_regen_cert: ""
 horizon_pki_san: "{{ openstack_pki_san | default('DNS:' ~ ansible_facts['hostname'] ~ ',IP:' ~ management_address) }}"
-horizon_pki_certificates:
-  - name: "horizon_{{ ansible_facts['hostname'] }}"
-    provider: ownca
-    cn: "{{ ansible_facts['hostname'] }}"
-    san: "{{ horizon_pki_san }}"
-    signed_by: "{{ horizon_pki_intermediate_cert_name }}"
-
-# Installation details for SSL certificates
-horizon_pki_install_certificates:
-  - src: "{{ horizon_user_ssl_cert | default(horizon_pki_certs_path ~ 'horizon_' ~ ansible_facts['hostname'] ~ '-chain.crt') }}"
-    dest: "{{ horizon_ssl_cert }}"
-    owner: "{{ horizon_system_user_name }}"
-    group: "{{ horizon_system_group_name }}"
-    mode: "0644"
-  - src: "{{ horizon_user_ssl_key | default(horizon_pki_keys_path ~ 'horizon_' ~ ansible_facts['hostname'] ~ '.key.pem') }}"
-    dest: "{{ horizon_ssl_key }}"
-    owner: "{{ horizon_system_user_name }}"
-    group: "{{ horizon_system_group_name }}"
-    mode: "0600"
-  - src: "{{ horizon_user_ssl_ca_cert | default(horizon_pki_intermediate_cert_path) }}"
-    dest: "{{ horizon_ssl_ca_cert }}"
-    owner: "{{ horizon_system_user_name }}"
-    group: "{{ horizon_system_group_name }}"
-    mode: "0644"
-    condition: "{{ horizon_user_ssl_ca_cert is defined }}"
 
 # Define user-provided SSL certificates
 # horizon_user_ssl_cert: <path to cert on ansible deployment host>
