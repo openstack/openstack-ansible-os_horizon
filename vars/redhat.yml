@@ -20,7 +20,7 @@ horizon_devel_distro_packages:
   - libxslt-devel
   - openssl
   - openssl-libs
-  - pcre-devel
+  - "{{ ansible_facts['distribution_major_version'] is version('10', '<') | ternary('pcre-devel', 'pcre2-devel') }}"
 
 horizon_apache_distro_packages:
   - python3-mod_wsgi
