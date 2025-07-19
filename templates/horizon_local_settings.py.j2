@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 
 from django.utils.translation import gettext_lazy as _
@@ -20,7 +19,7 @@ TEMPLATE_DEBUG = DEBUG
 STATIC_ROOT = '{{ horizon_lib_dir }}/static'
 
 # Django Compressor Settings. For more information, see:
-# http://django-compressor.readthedocs.org/en/latest/settings/
+# https://django-compressor.readthedocs.io/en/stable/settings.html
 COMPRESS_OFFLINE = True
 COMPRESS_ENABLED = True
 COMPRESS_ROOT = '{{ horizon_lib_dir }}/static'
@@ -54,7 +53,7 @@ ALLOWED_HOSTS = {{ horizon_allowed_hosts | to_json }}
 # For Django 1.4+ pass this header from the proxy after terminating the SSL,
 # and don't forget to strip it from the client's request.
 # For more information see:
-# https://docs.djangoproject.com/en/1.4/ref/settings/#secure-proxy-ssl-header
+# https://docs.djangoproject.com/en/dev/ref/settings/#secure-proxy-ssl-header
 SECURE_PROXY_SSL_HEADER = ('{{ horizon_secure_proxy_ssl_header_django }}', 'https')
 SECURE_PROXY_ADDR_HEADER = 'HTTP_X_FORWARDED_FOR'
 {% endif %}
@@ -291,12 +290,7 @@ LAUNCH_INSTANCE_DEFAULTS = {
 {%- endfor %}
 }
 
-# The Xen Hypervisor has the ability to set the mount point for volumes
-# attached to instances (other Hypervisors currently do not). Setting
-# can_set_mount_point to True will add the option to set the mount point
-# from the UI.
 OPENSTACK_HYPERVISOR_FEATURES = {
-    'can_set_mount_point': False,
     'can_set_password': {{ horizon_can_set_password }},
     'requires_keypair': False,
 }
@@ -379,10 +373,12 @@ OPENSTACK_HEAT_STACK = {
 #        ('docker', _('Docker')),
 #        ('iso', _('ISO - Optical Disk Image')),
 #        ('ova', _('OVA - Open Virtual Appliance')),
+#        ('ploop', _('PLOOP - Virtuozzo/Parallels Loopback Disk')),
 #        ('qcow2', _('QCOW2 - QEMU Emulator')),
 #        ('raw', _('Raw')),
 #        ('vdi', _('VDI - Virtual Disk Image')),
 #        ('vhd', ('VHD - Virtual Hard Disk')),
+#        ('vhdx', ('VHDX - Large Virtual Hard Disk')),
 #        ('vmdk', _('VMDK - Virtual Machine Disk')),
 #    ]
 #}
@@ -450,7 +446,7 @@ TIME_ZONE = "{{ horizon_time_zone }}"
 # you can provide another flavor attribute as sorting key. Alternatively, you
 # can provide a custom callback method to use for sorting. You can also provide
 # a flag for reverse sort. For more info, see
-# http://docs.python.org/2/library/functions.html#sorted
+# https://docs.python.org/3.10/library/functions.html#sorted
 #CREATE_INSTANCE_FLAVOR_SORT = {
 #    'key': 'name',
 #     # or
@@ -731,14 +727,6 @@ SECURITY_GROUP_RULES = {
 #
 # See Metadata Definitions on: https://docs.openstack.org/glance/latest/
 
-# Indicate to the Sahara data processing service whether or not
-# automatic floating IP allocation is in effect.  If it is not
-# in effect, the user will be prompted to choose a floating IP
-# pool for use in their cluster.  False by default.  You would want
-# to set this to True if you were running Nova Networking with
-# auto_assign_floating_ip = True.
-#SAHARA_AUTO_IP_ALLOCATION_ENABLED = False
-
 # The hash algorithm to use for authentication tokens. This must
 # match the hash algorithm that the identity server and the
 # auth_token middleware are using. Allowed values are the
@@ -779,7 +767,7 @@ REST_API_REQUIRED_SETTINGS = ['OPENSTACK_HYPERVISOR_FEATURES',
 # Scripting (XFS) vulnerability, so this option allows extra security hardening
 # where iframes are not used in deployment. Default setting is True.
 # For more information see:
-# http://tinyurl.com/anticlickjack
+# https://tinyurl.com/anticlickjack
 DISALLOW_IFRAME_EMBED = {{ horizon_disallow_iframe_embed | bool }}
 
 # The default date range in the Overview panel meters - either <today> minus N
