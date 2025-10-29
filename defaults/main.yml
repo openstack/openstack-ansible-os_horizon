@@ -274,9 +274,6 @@ horizon_keystone_default_domain: Default
 # second is the display name.
 horizon_keystone_multidomain_choices: "(('{{ horizon_keystone_default_domain }}', '{{ horizon_keystone_default_domain }}'),)"
 
-# Enable/disable v2 openrc file download in horizon.
-horizon_show_keystone_v2_rc: true
-
 ### Set the cacert pem for Keystone if you'd like Horizon to verify it.
 # horizon_cacert_pem: /path/to/cacert.pem
 
