@@ -23,7 +23,7 @@ horizon_devel_distro_packages:
   - libssl-dev
   - libxslt1.1
   - openssl
-  - libpcre3-dev
+  - libpcre2-dev
 
 horizon_apache_distro_packages:
   - libapache2-mod-wsgi-py3
