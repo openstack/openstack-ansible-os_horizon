@@ -13,18 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: Define horizon_lib_dir when it's not set
-  when: horizon_lib_dir is not defined or (horizon_lib_dir is defined and not horizon_lib_dir)
-  block:
-    - name: Find the venv's python version
-      ansible.builtin.command: "{{ horizon_bin }}/{{ horizon_venv_python_executable }} -c 'import horizon; print(horizon.__file__)'"
-      changed_when: false
-      register: _horizon_python_venv_details
-
-    - name: Set python lib dir fact
-      ansible.builtin.set_fact:
-        horizon_lib_dir: "{{ _horizon_python_venv_details.stdout | dirname | dirname }}"
-
 - name: Configure source-installed dashboards
   ansible.builtin.include_tasks: horizon_post_install_source.yml
   when: horizon_install_method == 'source'
