@@ -361,6 +361,11 @@ horizon_enable_zun_ui: "{{ (groups['zun_all'] is defined) and (groups['zun_all']
 ## Swift
 horizon_swift_file_transfer_chunk_size: 524288
 
+# This configuration option can be set to false to prevent Horizon from
+# doing full listing of containers and objects in the Swift panel that
+# can cause high resource consumption in Horizon.
+horizon_swift_panel_full_listing: false
+
 ## Panel
 horizon_default_panel: overview
 
