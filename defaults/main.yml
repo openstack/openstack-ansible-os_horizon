@@ -263,6 +263,7 @@ horizon_keystone_endpoint: "{{ keystone_service_internalurl }}"
 ## Horizon Multi-Domain Support
 # these variables should only be changed if horizon_keystone_endpoint is a Keystone v3 API endpoint
 horizon_keystone_multidomain_support: false
+
 # It is strongly advised NOT to enable dropdown for public clouds, as advertising enabled domains
 # to unauthenticated customers irresponsibly exposes private information.
 horizon_keystone_multidomain_dropdown: false
@@ -273,6 +274,18 @@ horizon_keystone_default_domain: Default
 # a list of pairs whose first value is the domain name and the
 # second is the display name.
 horizon_keystone_multidomain_choices: "(('{{ horizon_keystone_default_domain }}', '{{ horizon_keystone_default_domain }}'),)"
+
+# When multi-domain support is enabled, and the user is perceived
+# to be an admin in the domain this user is defined in,
+# Horizon when doing most requests to keystone silently replaces
+# the user's 'project-scoped' token with 'domain-scoped' one.
+# This however does not work well with some combinations of policies
+# (e.g. `admin_required: role:admin and is_admin_project:True`),
+# so operator should be able to opt out of this token scope swap.
+#
+# Default to `true` to keep current behavior, and token scope change
+# can be disabled by setting it to `false`.
+horizon_keystone_prefer_domain_token: true
 
 ### Set the cacert pem for Keystone if you'd like Horizon to verify it.
 # horizon_cacert_pem: /path/to/cacert.pem
