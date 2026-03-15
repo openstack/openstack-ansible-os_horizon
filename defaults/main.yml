@@ -498,6 +498,12 @@ horizon_translations_project_version: "master"
 # This variable is used to be able to fully override or
 # partially union/intersect lists in order to change the
 # behaviour of the pull of the translations per component.
+# horizon_translations_pull:
+#   - project: octavia-dashboard
+#     module: octavia_dashboard
+#     branch: "stable-2025.1"
+#     enabled: true
+
 horizon_translations_pull: "{{ _horizon_translations_pull }}"
 
 # Set arbitrary horizon configuration options
