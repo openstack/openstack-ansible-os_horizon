@@ -331,6 +331,9 @@ horizon_enable_cloudkitty_ui: "{{ (groups['cloudkitty_all'] is defined) and (gro
 ## Designate UI Panel
 horizon_enable_designate_ui: "{{ (groups['designate_all'] is defined) and (groups['designate_all'] | length > 0) }}"
 
+## Freezer UI Panel
+horizon_enable_freezer_ui: "{{ (groups['freezer_api'] is defined) and (groups['freezer_api'] | length > 0) }}"
+
 ## Heat UI Panel
 horizon_enable_heat_ui: "{{ (groups['heat_all'] is defined) and (groups['heat_all'] | length > 0) }}"
 
@@ -468,6 +471,8 @@ horizon_cloudkitty_optional_pip_packages:
   - "git+{{ cloudkitty_dashboard_git_repo }}@{{ cloudkitty_dashboard_git_install_branch }}#egg=cloudkitty_dashboard"
 horizon_designate_optional_pip_packages:
   - "git+{{ designate_dashboard_git_repo }}@{{ designate_dashboard_git_install_branch }}#egg=designate_dashboard"
+horizon_freezer_optional_pip_packages:
+  - "git+{{ freezer_dashboard_git_repo }}@{{ freezer_dashboard_git_install_branch }}#egg=freezer-web-ui"
 horizon_heat_optional_pip_packages:
   - "git+{{ heat_dashboard_git_repo }}@{{ heat_dashboard_git_install_branch }}#egg=heat_dashboard"
 horizon_ironic_optional_pip_packages:
