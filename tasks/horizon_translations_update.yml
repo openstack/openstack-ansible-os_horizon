@@ -20,7 +20,7 @@
     }}
   args:
     chdir: "{{ horizon_lib_dir }}/"
-  changed_when: false
+  changed_when: true
   with_items: "{{ horizon_translations_pull }}"
   loop_control:
     loop_var: translation
