@@ -233,8 +233,7 @@ horizon_ssl_cipher_suite_tls13: "{{ ssl_cipher_suite_tls13 | default('TLS_AES_12
 
 # Define if communication between haproxy and service backends should be
 # encrypted with TLS.
-# NOTE(damiandabrowski): Remove backward compatibility with horizon_enable_ssl in 2024.1
-horizon_backend_ssl: "{{ horizon_enable_ssl | default(openstack_service_backend_ssl | default(False)) }}"
+horizon_backend_ssl: "{{ openstack_service_backend_ssl | default(False) }}"
 
 # Toggle whether horizon is served via an external device, like a load
 # balancer. This enables the use of the horizon_secure_proxy_ssl_header
