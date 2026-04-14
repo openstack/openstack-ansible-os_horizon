@@ -148,6 +148,9 @@ horizon_session_caches:
   default:
     BACKEND: "django.core.cache.backends.memcached.PyMemcacheCache"
     LOCATION: "{{ horizon_memcached_servers.split(',') }}"
+    OPTIONS:
+      ignore_exc: true
+      use_pooling: "{{ (horizon_memcached_servers.split(',') | length > 1) }}"
 horizon_session_timeout: 1800
 
 ## Horizon Help URL Path
