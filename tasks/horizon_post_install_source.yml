@@ -46,7 +46,7 @@
       {%   endfor %}
       {% endfor %}
       {{ dashboard_path }}
-    patterns: ["^_[0-9]{2,4}_.*.py$"]
+    patterns: ["^_[0-9]{2,5}_.*.py$"]
     file_type: file
     use_regex: true
   register: found_panels
@@ -61,7 +61,7 @@
       {%   endfor %}
       {% endfor %}
       {{ dashboard_path }}
-    patterns: ["^_[0-9]{2,4}_.*.py$"]
+    patterns: ["^_[0-9]{2,5}_.*.py$"]
     file_type: file
     use_regex: true
   register: found_settings
