@@ -449,7 +449,7 @@ horizon_listen_ports:
   https: "443"
 
 horizon_pip_packages:
-  - "git+{{ horizon_git_repo }}@{{ horizon_git_install_branch }}#egg=horizon"
+  - "horizon@git+{{ horizon_git_repo }}@{{ horizon_git_install_branch }}"
   - "git+{{ openstack_github_base_url }}/Kronuz/pyScss@60414f5d573315a8458b5fbcdf69e5c648c44a9a" # needed for python>=3.11
   - pymemcache
   - python-memcached
@@ -464,43 +464,43 @@ horizon_user_pip_packages: []
 # TODO(odyssey4me):
 # Simplify this when we are no longer using the py_pkgs plugin
 horizon_adjutant_optional_pip_packages:
-  - "git+{{ adjutant_dashboard_git_repo }}@{{ adjutant_dashboard_git_install_branch }}#egg=adjutant-ui"
+  - "adjutant-ui@git+{{ adjutant_dashboard_git_repo }}@{{ adjutant_dashboard_git_install_branch }}"
 horizon_barbican_optional_pip_packages:
-  - "git+{{ barbican_dashboard_git_repo }}@{{ barbican_dashboard_git_install_branch }}#egg=barbican-ui"
+  - "barbican-ui@git+{{ barbican_dashboard_git_repo }}@{{ barbican_dashboard_git_install_branch }}"
 horizon_blazar_optional_pip_packages:
-  - "git+{{ blazar_dashboard_git_repo }}@{{ blazar_dashboard_git_install_branch }}#egg=blazar-dashboard"
+  - "blazar-dashboard@git+{{ blazar_dashboard_git_repo }}@{{ blazar_dashboard_git_install_branch }}"
 horizon_cloudkitty_optional_pip_packages:
-  - "git+{{ cloudkitty_dashboard_git_repo }}@{{ cloudkitty_dashboard_git_install_branch }}#egg=cloudkitty_dashboard"
+  - "cloudkitty_dashboard@git+{{ cloudkitty_dashboard_git_repo }}@{{ cloudkitty_dashboard_git_install_branch }}"
 horizon_designate_optional_pip_packages:
-  - "git+{{ designate_dashboard_git_repo }}@{{ designate_dashboard_git_install_branch }}#egg=designate_dashboard"
+  - "designate_dashboard@git+{{ designate_dashboard_git_repo }}@{{ designate_dashboard_git_install_branch }}"
 horizon_freezer_optional_pip_packages:
-  - "git+{{ freezer_dashboard_git_repo }}@{{ freezer_dashboard_git_install_branch }}#egg=freezer-web-ui"
+  - "freezer-web-ui@git+{{ freezer_dashboard_git_repo }}@{{ freezer_dashboard_git_install_branch }}"
 horizon_heat_optional_pip_packages:
-  - "git+{{ heat_dashboard_git_repo }}@{{ heat_dashboard_git_install_branch }}#egg=heat_dashboard"
+  - "heat_dashboard@git+{{ heat_dashboard_git_repo }}@{{ heat_dashboard_git_install_branch }}"
 horizon_ironic_optional_pip_packages:
-  - "git+{{ ironic_dashboard_git_repo }}@{{ ironic_dashboard_git_install_branch }}#egg=ironic-ui"
+  - "ironic-ui@git+{{ ironic_dashboard_git_repo }}@{{ ironic_dashboard_git_install_branch }}"
 horizon_magnum_optional_pip_packages:
-  - "git+{{ magnum_dashboard_git_repo }}@{{ magnum_dashboard_git_install_branch }}#egg=magnum-ui"
+  - "magnum-ui@git+{{ magnum_dashboard_git_repo }}@{{ magnum_dashboard_git_install_branch }}"
 horizon_manila_optional_pip_packages:
-  - "git+{{ manila_dashboard_git_repo }}@{{ manila_dashboard_git_install_branch }}#egg=manila-ui"
+  - "manila-ui@git+{{ manila_dashboard_git_repo }}@{{ manila_dashboard_git_install_branch }}"
 horizon_masakari_optional_pip_packages:
-  - "git+{{ masakari_dashboard_git_repo }}@{{ masakari_dashboard_git_install_branch }}#egg=masakari_dashboard"
+  - "masakari_dashboard@git+{{ masakari_dashboard_git_repo }}@{{ masakari_dashboard_git_install_branch }}"
 horizon_mistral_optional_pip_packages:
-  - "git+{{ mistral_dashboard_git_repo }}@{{ mistral_dashboard_git_install_branch }}#egg=mistral-dashboard"
+  - "mistral-dashboard@git+{{ mistral_dashboard_git_repo }}@{{ mistral_dashboard_git_install_branch }}"
 horizon_neutron_vpnaas_optional_pip_packages:
-  - "git+{{ neutron_vpnaas_dashboard_git_repo }}@{{ neutron_vpnaas_dashboard_git_install_branch }}#egg=neutron_vpnaas_dashboard"
+  - "neutron_vpnaas_dashboard@git+{{ neutron_vpnaas_dashboard_git_repo }}@{{ neutron_vpnaas_dashboard_git_install_branch }}"
 horizon_neutron_fwaas_optional_pip_packages:
-  - "git+{{ neutron_fwaas_dashboard_git_repo }}@{{ neutron_fwaas_dashboard_git_install_branch }}#egg=neutron_fwaas_dashboard"
+  - "neutron_fwaas_dashboard@git+{{ neutron_fwaas_dashboard_git_repo }}@{{ neutron_fwaas_dashboard_git_install_branch }}"
 horizon_octavia_optional_pip_packages:
-  - "git+{{ octavia_dashboard_git_repo }}@{{ octavia_dashboard_git_install_branch }}#egg=octavia_dashboard"
+  - "octavia_dashboard@git+{{ octavia_dashboard_git_repo }}@{{ octavia_dashboard_git_install_branch }}"
 horizon_tacker_optional_pip_packages:
-  - "git+{{ tacker_dashboard_git_repo }}@{{ tacker_dashboard_git_install_branch }}#egg=tacker_horizon"
+  - "tacker_horizon@git+{{ tacker_dashboard_git_repo }}@{{ tacker_dashboard_git_install_branch }}"
 horizon_trove_optional_pip_packages:
-  - "git+{{ trove_dashboard_git_repo }}@{{ trove_dashboard_git_install_branch }}#egg=trove_dashboard"
+  - "trove_dashboard@git+{{ trove_dashboard_git_repo }}@{{ trove_dashboard_git_install_branch }}"
 horizon_watcher_optional_pip_packages:
-  - "git+{{ watcher_dashboard_git_repo }}@{{ watcher_dashboard_git_install_branch }}#egg=watcher_dashboard"
+  - "watcher_dashboard@git+{{ watcher_dashboard_git_repo }}@{{ watcher_dashboard_git_install_branch }}"
 horizon_zun_optional_pip_packages:
-  - "git+{{ zun_dashboard_git_repo }}@{{ zun_dashboard_git_install_branch }}#egg=zun_ui"
+  - "zun_ui@git+{{ zun_dashboard_git_repo }}@{{ zun_dashboard_git_install_branch }}"
 
 # This variable is used to install additional pip packages
 # that could be needed for additional dashboards required
