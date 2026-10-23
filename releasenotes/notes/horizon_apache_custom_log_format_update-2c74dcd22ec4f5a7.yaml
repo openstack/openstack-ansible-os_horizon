@@ -1,0 +1,6 @@
+---
+other:
+  - |
+    Update default value of ``horizon_apache_custom_log_format`` to include
+    X-Forwarded-For header logging when present
+
